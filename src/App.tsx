@@ -1,9 +1,7 @@
+import { QuizPage } from './pages/QuizPage'
+
 function App() {
-  return (
-    <div className='bg-red-500'>
-      <h1 className='text-3xl font-bold underline'>Hello world!</h1>
-    </div>
-  )
+  return <QuizPage />
 }
 
 export default App
