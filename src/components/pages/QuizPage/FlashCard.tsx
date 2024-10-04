@@ -29,7 +29,10 @@ export const FlashCard = () => {
 
   return (
     <div
-      className={clsx('card max-w-[1440px] w-screen flex-1 select-none', { flipped: isFlipped })}
+      className={clsx('card max-w-[1440px] w-screen flex-1 select-none', {
+        flipped: isFlipped,
+        'cursor-pointer': !isFlipped,
+      })}
       onClick={() => setFlipped(true)}>
       <div className='card-inner w-full'>
         <div className={clsx('card-front text-xl lg:text-2xl font-medium', commonClassname, cardClassname)}>
