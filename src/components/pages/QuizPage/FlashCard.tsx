@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { randomIntFromInterval } from '../../../util'
 
 const CARD_STYLES = [
@@ -20,7 +20,7 @@ const CARD_STYLES = [
 
 export const FlashCard = () => {
   const [isFlipped, setFlipped] = useState(false)
-  const cardClassname = CARD_STYLES[randomIntFromInterval(0, CARD_STYLES.length - 1)]
+  const cardClassname = useMemo(() => CARD_STYLES[randomIntFromInterval(0, CARD_STYLES.length - 1)], [])
   const commonClassname =
     'border-4 outline outline-gray-500 p-4 text-center flex justify-center items-center rounded-md border-gray-400 drop-shadow-lg'
 
