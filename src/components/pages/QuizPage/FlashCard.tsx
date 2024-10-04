@@ -27,13 +27,17 @@ export const FlashCard = () => {
   const question = `What is the key difference between arrow functions and regular functions regarding 'this'?`
   const answer = `Arrow functions do not have their own 'this'; they inherit it from their surrounding lexical context. Regular functions have dynamic 'this', which can change depending on how they are called.`
 
+  const handleCardFlip = () => {
+    setFlipped(true)
+  }
+
   return (
     <div
       className={clsx('card max-w-[1440px] w-screen flex-1 select-none', {
         flipped: isFlipped,
         'cursor-pointer': !isFlipped,
       })}
-      onClick={() => setFlipped(true)}>
+      onClick={handleCardFlip}>
       <div className='card-inner w-full'>
         <div className={clsx('card-front text-xl lg:text-2xl font-medium', commonClassname, cardClassname)}>
           {question}
