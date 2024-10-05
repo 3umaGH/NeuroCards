@@ -18,6 +18,12 @@ export const QuizResult = ({
   onEndlessModeClick,
   onRetryClick,
 }: QuizResult) => {
+  const isRetryBadGradesDisabled = answeredQuestions.every(question => !BAD_GRADE_FILTER(question)) // Disabled if all questions passed bad grade filter
+
+  const handleStartBadGradesGame = () => {
+    onBadGradeRetryClick(answeredQuestions.filter(BAD_GRADE_FILTER).map(question => question.id))
+  }
+
   return (
     <div className='flex flex-col items-center w-full h-full p-4 py-4 overflow-auto bg-white justify-evenly rounded-3xl'>
       <h1 className='my-8 text-3xl font-black uppercase md:my-16 md:text-5xl animate-bounce'>Complete!</h1>
@@ -42,9 +48,7 @@ export const QuizResult = ({
           </Button>
         </div>
 
-        <Button
-          onClick={() => onBadGradeRetryClick(answeredQuestions.filter(BAD_GRADE_FILTER).map(question => question.id))}
-          className='mt-4 bg-teal-500'>
+        <Button onClick={handleStartBadGradesGame} disabled={isRetryBadGradesDisabled} className='mt-4 bg-teal-500'>
           Rety bad grades
         </Button>
       </div>
