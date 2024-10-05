@@ -39,6 +39,7 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
         totalQuestions={initialQuestions.length}
         questionsLeft={questions.length}
         buttonEnabled={!isFlipped}
+        isFinished={isQuizFinished}
         onFlipClick={() => setFlipped(true)}
       />
     </QuizLayout>

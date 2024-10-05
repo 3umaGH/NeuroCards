@@ -5,11 +5,12 @@ type QuizStatus = {
   questionsLeft: number
   totalQuestions: number
 
+  isFinished: boolean
   buttonEnabled: boolean
   onFlipClick: () => void
 }
 
-export const QuizStatus = ({ questionsLeft, totalQuestions, buttonEnabled, onFlipClick }: QuizStatus) => {
+export const QuizStatus = ({ questionsLeft, totalQuestions, buttonEnabled, isFinished, onFlipClick }: QuizStatus) => {
   return (
     <div className='flex flex-col items-center w-full gap-4 mt-4 text-xl'>
       <div className='flex flex-col items-start w-full'>
@@ -19,8 +20,8 @@ export const QuizStatus = ({ questionsLeft, totalQuestions, buttonEnabled, onFli
         </span>
       </div>
 
-      <Button onClick={onFlipClick} disabled={!buttonEnabled}>
-        {!buttonEnabled ? 'Please rate your answer' : 'Flip card'}
+      <Button onClick={onFlipClick} disabled={!buttonEnabled || isFinished}>
+        {isFinished ? 'Quiz Finished' : !buttonEnabled ? 'Please rate your answer' : 'Flip card'}
       </Button>
     </div>
   )
