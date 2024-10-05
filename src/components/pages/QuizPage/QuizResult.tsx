@@ -28,7 +28,7 @@ export const QuizResult = ({
     <div className='flex flex-col items-center w-full h-full p-4 py-4 overflow-auto bg-white justify-evenly rounded-3xl'>
       <h1 className='my-8 text-3xl font-black uppercase md:my-16 md:text-5xl animate-bounce'>Complete!</h1>
 
-      <div className='flex flex-col flex-1 overflow-auto min-h-[150px] max-w-full border rounded-xl gap-2 p-2 md:p-4'>
+      <div className='flex flex-col flex-1 w-full overflow-auto min-h-[150px] max-w-full border rounded-xl gap-2 p-2 md:p-4'>
         {answeredQuestions.map((question, index) => (
           <div
             key={`${question.id}_${question.answered_at}`}
