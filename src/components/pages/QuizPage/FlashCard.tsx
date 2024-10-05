@@ -38,17 +38,17 @@ export const FlashCard = () => {
         'cursor-pointer': !isFlipped,
       })}
       onClick={handleCardFlip}>
-      <div className='card-inner w-full'>
+      <div className='w-full card-inner'>
         <div className={clsx('card-front text-xl lg:text-2xl font-medium', commonClassname, cardClassname)}>
           {question}
         </div>
         <div className={clsx('card-back', commonClassname, cardClassname)}>
-          <div className='w-full h-full bg-black opacity-50 absolute top-0 left-0 z-[1]' />
+          <div className='w-full h-full bg-black opacity-20 absolute top-0 left-0 z-[1]' />
 
           <div className='absolute z-[2] p-4 flex flex-col h-full justify-evenly'>
-            <div className='text-xl lg:text-2xl font-medium'>{question}</div>
+            <div className='text-xl font-medium lg:text-2xl'>{question}</div>
 
-            <div className='text-lg lg:text-xl font-medium'>{answer}</div>
+            <div className='text-lg font-medium lg:text-xl'>{answer}</div>
 
             <div className={clsx('flex flex-col items-center opacity-0', { 'animate-fade-in-slow': isFlipped })}>
               <span>How close was your answer?</span>
