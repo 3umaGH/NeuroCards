@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
 import { randomIntFromInterval } from '../../../util'
+import { QuestionGrade } from '../../../constants/quiz'
 
 const CARD_STYLES = [
   'bg-teal-600 text-white',
@@ -18,14 +19,17 @@ const CARD_STYLES = [
   'bg-blue-500 text-white',
 ]
 
-export const FlashCard = () => {
+type FlashCard = {
+  question: string
+  answer: string
+  onGradeClick: (grade: QuestionGrade) => void
+}
+
+export const FlashCard = ({ question, answer, onGradeClick }: FlashCard) => {
   const [isFlipped, setFlipped] = useState(false)
   const cardClassname = useMemo(() => CARD_STYLES[randomIntFromInterval(0, CARD_STYLES.length - 1)], [])
   const commonClassname =
     'border-4 outline outline-gray-500 p-4 text-center flex justify-center items-center rounded-md border-gray-400 drop-shadow-lg'
-
-  const question = `What is the key difference between arrow functions and regular functions regarding 'this'?`
-  const answer = `Arrow functions do not have their own 'this'; they inherit it from their surrounding lexical context. Regular functions have dynamic 'this', which can change depending on how they are called.`
 
   const handleCardFlip = () => {
     setFlipped(true)
@@ -54,11 +58,21 @@ export const FlashCard = () => {
               <span>How close was your answer?</span>
 
               <div className='flex justify-between mt-6 flex-wrap max-w-[500px] w-full px-8'>
-                <span className='answer-grading-button'>🌟</span>
-                <span className='answer-grading-button'>😊</span>
-                <span className='answer-grading-button'>😐</span>
-                <span className='answer-grading-button'>😬</span>
-                <span className='answer-grading-button'>💀</span>
+                <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.EXCELLENT)}>
+                  🌟
+                </span>
+                <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.GOOD)}>
+                  😊
+                </span>
+                <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.FAIR)}>
+                  😐
+                </span>
+                <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.POOR)}>
+                  😬
+                </span>
+                <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.VERY_POOR)}>
+                  💀
+                </span>
               </div>
             </div>
           </div>
