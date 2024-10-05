@@ -8,10 +8,11 @@ import { QuizStatus } from './QuizStatus'
 import { shuffleArray } from '../../../util'
 
 type Quiz = {
+  topic: string
   initialQuestions: FlashCardQuestion[]
 }
 
-export const Quiz = ({ initialQuestions }: Quiz) => {
+export const Quiz = ({ topic, initialQuestions }: Quiz) => {
   const [questions, setQuestions] = useState<FlashCardQuestion[]>([]) // Unanswered questions;
   const [answeredQuestions, setAnsweredQuestions] = useState<FlashCardAnsweredQuestion[]>([])
   const [totalQuestionsLength, setTotalQuestionsLength] = useState(initialQuestions.length)
@@ -71,7 +72,7 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
 
   return (
     <QuizLayout>
-      <h3 className='w-full my-4 text-2xl font-bold text-left text-white'>Learning the whatever</h3>
+      <h3 className='w-full my-4 text-2xl font-bold text-left text-white'>{topic}</h3>
       {!isQuizFinished ? (
         <FlashCard question={questions[0]} flipped={isFlipped} onGradeClick={handleGradeQuestion} />
       ) : (
