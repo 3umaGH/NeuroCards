@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { CommonProps } from '../../types/common'
 
-type Button = { children: React.ReactNode; disabled: boolean } & React.ButtonHTMLAttributes<HTMLButtonElement> &
+type Button = { children: React.ReactNode; disabled?: boolean } & React.ButtonHTMLAttributes<HTMLButtonElement> &
   CommonProps
 
 export const Button = ({ className, children, disabled, ...props }: Button) => {
