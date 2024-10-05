@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { memo, useEffect, useState } from 'react'
-import { QuestionGrade } from '../../../constants/quiz'
+import { gradeEmojiMap, QuestionGrade } from '../../../constants/quiz'
 import { FlashCardQuestion } from '../../../types/quiz'
 
 type FlashCard = {
@@ -46,19 +46,19 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
 
                 <div className='flex justify-between mt-6 flex-wrap max-w-[500px] w-full px-8'>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.EXCELLENT)}>
-                    🌟
+                    {gradeEmojiMap[QuestionGrade.EXCELLENT]}
                   </span>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.GOOD)}>
-                    😊
+                    {gradeEmojiMap[QuestionGrade.GOOD]}
                   </span>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.FAIR)}>
-                    😐
+                    {gradeEmojiMap[QuestionGrade.FAIR]}
                   </span>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.POOR)}>
-                    😬
+                    {gradeEmojiMap[QuestionGrade.POOR]}
                   </span>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.VERY_POOR)}>
-                    💀
+                    {gradeEmojiMap[QuestionGrade.VERY_POOR]}
                   </span>
                 </div>
               </div>
