@@ -4,6 +4,7 @@ import { FlashCardQuestion } from '../../../types/quiz'
 import { QuizLayout } from '../../layout/QuizLayout'
 import { FlashCard } from './FlashCard'
 import { QuizStatus } from './QuizStatus'
+import { QuizResult } from './QuizResult'
 
 type Quiz = {
   initialQuestions: FlashCardQuestion[]
@@ -28,18 +29,17 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
 
   return (
     <QuizLayout>
-      {!isQuizFinished && (
-        <FlashCard
-          question={questions[0]}
-          flipped={isFlipped}
-          onCardClick={() => setFlipped(true)}
-          onGradeClick={handleGradeQuestion}
-        />
+      <h3 className='w-full my-4 text-2xl font-bold text-left text-white'>Learning the whatever</h3>
+      {!isQuizFinished ? (
+        <FlashCard question={questions[0]} flipped={isFlipped} onGradeClick={handleGradeQuestion} />
+      ) : (
+        <QuizResult />
       )}
       <QuizStatus
         totalQuestions={initialQuestions.length}
         questionsLeft={questions.length}
-        onSkipClick={() => handleGradeQuestion(QuestionGrade.SKIPPED)}
+        buttonEnabled={!isFlipped}
+        onFlipClick={() => setFlipped(true)}
       />
     </QuizLayout>
   )

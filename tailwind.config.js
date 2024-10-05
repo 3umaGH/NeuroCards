@@ -2,13 +2,16 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    boxShadow: {
+      innerDecoration: 'inset -11px -8px 78px -25px rgba(0,0,150,0.82)',
+    },
     extend: {
       fontFamily: {
         lato: ['Lato', 'sans-serif'],
       },
       animation: {
         wiggle: 'wiggle 0.8s ease-in infinite',
-        'fade-in-slow': 'fade_in 0.5s ease-in 1s  forwards',
+        'fade-in-slow': 'fade_in 0.5s ease-in 1s forwards',
       },
       keyframes: {
         wiggle: {

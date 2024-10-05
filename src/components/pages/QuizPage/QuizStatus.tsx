@@ -1,21 +1,27 @@
-import skipSvg from '../../../assets/skip.svg'
+import { Button } from '../../common/Button'
+import { ProgressBar } from '../../common/ProgressBar'
 
 type QuizStatus = {
   questionsLeft: number
   totalQuestions: number
 
-  onSkipClick: () => void
+  buttonEnabled: boolean
+  onFlipClick: () => void
 }
 
-export const QuizStatus = ({ questionsLeft, totalQuestions, onSkipClick }: QuizStatus) => {
+export const QuizStatus = ({ questionsLeft, totalQuestions, buttonEnabled, onFlipClick }: QuizStatus) => {
   return (
-    <div className='rounded-md items-center border-[rgb(134,134,134)] drop-shadow-lg outline outline-gray-500 flex justify-between w-full p-4 text-xl font-bold bg-[#C6C6C6] border-4 max-w-[1440px]'>
-      <span>
-        Questions: {questionsLeft} / {totalQuestions}
-      </span>
-      <button onClick={onSkipClick}>
-        <img src={skipSvg} className='w-8 h-8' />
-      </button>
+    <div className='flex flex-col items-center w-full gap-4 mt-4 text-xl'>
+      <div className='flex flex-col items-start w-full'>
+        <ProgressBar className='w-full' value={totalQuestions - questionsLeft} maxValue={totalQuestions} />
+        <span className='px-2 text-base font-bold'>
+          {questionsLeft} / {totalQuestions}
+        </span>
+      </div>
+
+      <Button onClick={onFlipClick} disabled={!buttonEnabled}>
+        {!buttonEnabled ? 'Please rate your answer' : 'Flip card'}
+      </Button>
     </div>
   )
 }

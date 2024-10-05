@@ -4,12 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  --primary: #5352ec;
+}
+
 body {
   background-color: rgb(244, 244, 244);
 }
 
 .card {
-  perspective: 1000px;
+  perspective: 10000px;
 }
 
 .card-inner {
