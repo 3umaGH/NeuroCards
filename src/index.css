@@ -17,7 +17,7 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s;
+  transition: transform 0.5s;
 }
 
 .card.flipped .card-inner {
@@ -37,5 +37,5 @@ body {
 }
 
 .answer-grading-button {
-  @apply hover:animate-wiggle cursor-pointer hover:scale-110 text-2xl sm:text-3xl lg:text-4xl;
+  @apply text-2xl cursor-pointer hover:animate-wiggle hover:scale-110 sm:text-3xl lg:text-4xl;
 }

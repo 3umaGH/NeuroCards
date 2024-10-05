@@ -8,7 +8,7 @@ export default {
       },
       animation: {
         wiggle: 'wiggle 0.8s ease-in infinite',
-        'fade-in-slow': 'fade_in 0.5s ease-in 2s  forwards',
+        'fade-in-slow': 'fade_in 0.5s ease-in 1s  forwards',
       },
       keyframes: {
         wiggle: {
