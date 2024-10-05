@@ -7,7 +7,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        lato: ['Lato', 'sans-serif'],
+        karla: ['Karla', 'sans-serif'],
       },
       animation: {
         wiggle: 'wiggle 0.8s ease-in infinite',
