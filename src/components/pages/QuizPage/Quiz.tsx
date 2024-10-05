@@ -30,8 +30,6 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
     })
   }
 
-  console.log(answeredQuestions)
-
   const resetGame = (newQuestions: FlashCardQuestion[], endless: boolean) => {
     setQuestions(() => {
       const newQuestionsState = [...newQuestions]
