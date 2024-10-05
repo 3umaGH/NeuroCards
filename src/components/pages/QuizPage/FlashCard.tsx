@@ -55,7 +55,7 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
                 onAnimationEnd={() => setGradingAnimationFinished(true)}>
                 <span className='md:text-lg'>Rate your answer to continue</span>
 
-                <div className='flex justify-between mt-6 flex-wrap max-w-[500px] w-full px-4'>
+                <div className='flex justify-between mt-6 flex-wrap max-w-[300px] sm:max-w-[500px] w-full px-4'>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.EXCELLENT)}>
                     {gradeEmojiMap[QuestionGrade.EXCELLENT]}
                   </span>
