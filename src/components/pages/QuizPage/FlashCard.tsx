@@ -35,9 +35,11 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
   const commonClassname =
     'border-4 outline outline-gray-500 p-4 text-center flex justify-center items-center rounded-md border-gray-400 drop-shadow-lg'
   const [cardClassname, setCardClassname] = useState(getRandomCardStyle())
+  const [gradingAnimationFinished, setGradingAnimationFinished] = useState(false)
 
   useEffect(() => {
     setCardClassname(getRandomCardStyle())
+    setGradingAnimationFinished(false)
   }, [question.id])
 
   return (
@@ -59,7 +61,12 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
               <div className='text-xl font-medium lg:text-2xl'>{question.question}</div>
               <div className='text-lg font-medium lg:text-xl'>{question.answer}</div>
 
-              <div className={clsx('flex flex-col items-center opacity-0', { 'animate-fade-in-slow': flipped })}>
+              <div
+                className={clsx('flex flex-col items-center opacity-0', {
+                  'animate-fade-in-slow': flipped,
+                  'pointer-events-none': !gradingAnimationFinished,
+                })}
+                onAnimationEnd={() => setGradingAnimationFinished(true)}>
                 <span>How close was your answer?</span>
 
                 <div className='flex justify-between mt-6 flex-wrap max-w-[500px] w-full px-8'>
