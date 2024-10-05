@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { memo, useEffect, useState } from 'react'
 import { gradeEmojiMap, QuestionGrade } from '../../../constants/quiz'
 import { FlashCardQuestion } from '../../../types/quiz'
+import logo from '../../../assets/NeuroCard.svg'
 
 type FlashCard = {
   question: FlashCardQuestion
@@ -22,12 +23,22 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
 
   return (
     <div
-      className={clsx('card w-full flex-1 select-none text-[#2c2b35]', {
+      className={clsx('card relative w-full flex-1 select-none text-[#2c2b35]', {
         flipped: flipped,
       })}
       onClick={onCardClick}>
       <div className='w-full card-inner'>
-        <div className={clsx('card-front text-xl lg:text-2xl font-bold', commonClassname)}>{question.question}</div>
+        <div className={clsx('card-front text-xl lg:text-2xl font-bold relative', commonClassname)}>
+          <div className='absolute bottom-[0%] left-[50%] z-[1] translate-x-[-50%] opacity-5 w-[100%] overflow-hidden brightness-0'>
+            <img src={logo} className='w-full h-full' />
+          </div>
+
+          <div className='absolute top-[0%] left-[50%] z-[1] translate-x-[-50%] opacity-5 w-[100%] overflow-hidden brightness-0'>
+            <img src={logo} className='w-full h-full' />
+          </div>
+
+          <div className='z-[2]'> {question.question}</div>
+        </div>
         <div className={clsx('card-back', commonClassname)}>
           <div className='w-full h-full bg-black opacity-[0.005] absolute top-0 left-0 z-[1]' />
 
