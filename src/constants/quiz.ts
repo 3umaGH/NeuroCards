@@ -1,4 +1,4 @@
-import { FlashCardQuestion } from '../types/quiz'
+import { FlashCardQuiz } from '../types/quiz'
 
 export enum QuestionGrade {
   EXCELLENT = 5,
@@ -16,69 +16,72 @@ export const gradeEmojiMap: Record<QuestionGrade, string> = {
   [QuestionGrade.VERY_POOR]: '💀',
 }
 
-export const mockQuestions: FlashCardQuestion[] = [
-  {
-    id: 0,
-    question: 'What is the main objective of the Summer Hacks by Edulearn hackathon?',
-    answer:
-      'To develop a tech-based solution that targets a challenge or enhances learning experiences within the field of education.',
-  },
-  {
-    id: 1,
-    question: 'What types of projects can participants build for the hackathon?',
-    answer:
-      'Participants can build web applications, mobile apps, games, software tools, or any other innovative digital solution.',
-  },
-  {
-    id: 2,
-    question: 'What is required for the project prototype?',
-    answer:
-      'A functioning prototype demonstrating core features and functionalities, with a focus on being polished and user-friendly.',
-  },
- /* {
-    id: 3,
-    question: 'Where should participants maintain their project code?',
-    answer: 'A public code repository on a platform like GitHub, GitLab, or Bitbucket.',
-  },
-  {
-    id: 4,
-    question: 'What should the demo video include?',
-    answer:
-      "A compelling presentation of the project's functionality and features, explaining how it addresses an educational challenge, up to 5 minutes long.",
-  },
-  {
-    id: 5,
-    question: 'What format should the presentation deck be in?',
-    answer: 'The presentation deck should be in PDF or PowerPoint format.',
-  },
-  {
-    id: 6,
-    question: 'What should the presentation deck cover?',
-    answer:
-      'An overview of the project, including its purpose, features, and potential impact on education, with visuals and clear explanations.',
-  },
-  {
-    id: 7,
-    question: 'What must be included in the technical documentation?',
-    answer:
-      'A concise document outlining how to set up, configure, and use the project, ensuring clarity for understanding the technical aspects.',
-  },
-  {
-    id: 8,
-    question: 'What information is required about the team members?',
-    answer:
-      'Names and contact details of all team members, along with a brief introduction or bio emphasizing their roles and contributions.',
-  },
-  {
-    id: 9,
-    question: 'What are additional materials that participants can submit?',
-    answer:
-      "Supplementary materials like concept art, design mockups, user stories, or any other relevant content that enhances the project's presentation.",
-  },
-  {
-    id: 10,
-    question: 'What is encouraged for participants in terms of creativity?',
-    answer:
-      'To think innovatively, push creative boundaries, and strive to make a meaningful impact on education through their technological solution.',
-  },*/
-]
+export const mockQuiz: FlashCardQuiz = {
+  quiz_topic: 'JavaScript and TypeScript Concepts',
+  questions: [
+    {
+      id: 0,
+      question: "What is the main difference between arrow functions and regular functions regarding 'this'?",
+      answer: 'Arrow functions do not have their own -this-. They inherit it from their surrounding lexical context.',
+    },
+    {
+      id: 1,
+      question: "How does 'this' behave in a regular function?",
+      answer:
+        "'this' in a regular function is -dynamic-. It refers to the object the method is called on or the global object if called outside a method.",
+    },
+    {
+      id: 2,
+      question: 'What is the difference between a function declaration and a function expression?',
+      answer:
+        'A function declaration is hoisted and function scoped while a function expression is hoisted only as a variable, not as a function.',
+    },
+    {
+      id: 3,
+      question: 'What is the Temporal Dead Zone (TDZ)?',
+      answer:
+        'The TDZ is the period when variables declared with -let-, -const-, or -class- are in scope but not yet initialized, leading to a ReferenceError if accessed.',
+    },
+    {
+      id: 4,
+      question: 'What do the rest and spread operators do?',
+      answer:
+        'The -spread- operator expands an iterable into individual elements, while the -rest- operator groups an unknown number of arguments into an array.',
+    },
+    {
+      id: 5,
+      question: 'What are the scoping rules for var, let, and const?',
+      answer:
+        'Var is -function-scoped-, while let and const are -block-scoped- and cannot be accessed until after their declaration (TDZ).',
+    },
+    {
+      id: 6,
+      question: 'What is a closure?',
+      answer:
+        "A closure is when an inner function retains access to its parent's variables even after the parent function has returned.",
+    },
+    {
+      id: 7,
+      question: 'What does immutability mean in functional programming?',
+      answer:
+        'Immutability means that data structures are -immutable-, and instead of modifying them, new data structures are created.',
+    },
+    {
+      id: 8,
+      question: 'What defines a pure function?',
+      answer: 'A pure function always returns the same result for the same inputs and has -no side effects-.',
+    },
+    {
+      id: 9,
+      question: 'What are higher-order functions?',
+      answer:
+        'Higher-order functions are functions that either take other functions as -arguments- or return them as -outputs-.',
+    },
+    {
+      id: 10,
+      question: 'What is a declarative approach in programming?',
+      answer:
+        'A declarative approach focuses on -what to do- rather than -how to do it-, emphasizing the desired outcome over the process.',
+    },
+  ],
+}

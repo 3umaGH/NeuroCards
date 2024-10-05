@@ -1,6 +1,6 @@
 import { Quiz } from '../components/pages/QuizPage/Quiz'
-import { mockQuestions } from '../constants/quiz'
+import { mockQuiz } from '../constants/quiz'
 
 export const QuizPage = () => {
-  return <Quiz topic='Test Topic' initialQuestions={mockQuestions} />
+  return <Quiz topic={mockQuiz.quiz_topic} initialQuestions={mockQuiz.questions} />
 }
