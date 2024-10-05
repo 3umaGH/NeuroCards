@@ -3,8 +3,8 @@ import { QuestionGrade } from '../../../constants/quiz'
 import { FlashCardAnsweredQuestion, FlashCardQuestion } from '../../../types/quiz'
 import { QuizLayout } from '../../layout/QuizLayout'
 import { FlashCard } from './FlashCard'
-import { QuizStatus } from './QuizStatus'
 import { QuizResult } from './QuizResult'
+import { QuizStatus } from './QuizStatus'
 
 type Quiz = {
   initialQuestions: FlashCardQuestion[]
@@ -19,15 +19,18 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
   const isQuizFinished = questions.length === 0
 
   const handleGradeQuestion = (grade: QuestionGrade) => {
-    if (isEndlessMode) {
-      setQuestions(prev => [...prev, prev[0]])
-    }
+    setAnsweredQuestions(p => [...p, { ...questions[0], grade: grade, answered_at: Date.now() }])
 
     setQuestions(prev => {
-      setAnsweredQuestions(p => [...p, { ...prev[0], grade: grade }])
-      return prev.slice(1)
+      if (isEndlessMode) {
+        return [...prev.slice(1), prev[0]]
+      } else {
+        return prev.slice(1)
+      }
     })
   }
+
+  console.log(answeredQuestions)
 
   const resetGame = (newQuestions: FlashCardQuestion[], endless: boolean) => {
     setQuestions(() => {
