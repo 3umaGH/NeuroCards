@@ -44,7 +44,7 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
 
           {flipped && (
             <div className='absolute z-[2] p-4 flex flex-col h-full justify-evenly gap-4'>
-              <div className='text-xl font-medium text-gray-500 lg:text-base line-clamp-2'>{question.question}</div>
+              <div className='text-base font-medium text-gray-500 lg:text-xl line-clamp-2'>{question.question}</div>
               <div className='text-lg font-medium lg:text-xl'>{question.answer}</div>
 
               <div
@@ -53,9 +53,9 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
                   'pointer-events-none': !gradingAnimationFinished,
                 })}
                 onAnimationEnd={() => setGradingAnimationFinished(true)}>
-                <span>How close was your answer?</span>
+                <span className='md:text-lg'>Rate your answer to continue</span>
 
-                <div className='flex justify-between mt-6 flex-wrap max-w-[500px] w-full px-8'>
+                <div className='flex justify-between mt-6 flex-wrap max-w-[500px] w-full px-4'>
                   <span className='answer-grading-button' onClick={() => onGradeClick(QuestionGrade.EXCELLENT)}>
                     {gradeEmojiMap[QuestionGrade.EXCELLENT]}
                   </span>
