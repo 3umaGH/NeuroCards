@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { QuestionGrade } from '../../../constants/quiz'
 import { FlashCardAnsweredQuestion, FlashCardQuestion } from '../../../types/quiz'
 import { QuizLayout } from '../../layout/QuizLayout'
 import { FlashCard } from './FlashCard'
 import { QuizResult } from './QuizResult'
 import { QuizStatus } from './QuizStatus'
+import { shuffleArray } from '../../../util'
 
 type Quiz = {
   initialQuestions: FlashCardQuestion[]
 }
 
 export const Quiz = ({ initialQuestions }: Quiz) => {
-  const [questions, setQuestions] = useState<FlashCardQuestion[]>([...initialQuestions]) // Unanswered questions;
+  const [questions, setQuestions] = useState<FlashCardQuestion[]>([]) // Unanswered questions;
   const [answeredQuestions, setAnsweredQuestions] = useState<FlashCardAnsweredQuestion[]>([])
   const [totalQuestionsLength, setTotalQuestionsLength] = useState(initialQuestions.length)
   const [isEndlessMode, setEndlessMode] = useState(false)
@@ -41,16 +42,19 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
     })
   }
 
-  const handleGameRestart = () => {
-    resetGame([...initialQuestions], false)
-  }
+  const handleGameRestart = useCallback(() => {
+    resetGame(shuffleArray(initialQuestions), false)
+  }, [initialQuestions])
 
   const handleEndlessGameStart = () => {
-    resetGame([...initialQuestions], true)
+    resetGame(shuffleArray(initialQuestions), true)
   }
 
   const handleRetryBadGradesStart = (questionIds: number[]) => {
-    resetGame([...initialQuestions.filter(question => questionIds.includes(question.id))], false)
+    resetGame(
+      shuffleArray(initialQuestions).filter(question => questionIds.includes(question.id)),
+      false
+    )
   }
 
   const handleStopEndlessMode = () => {
@@ -60,6 +64,10 @@ export const Quiz = ({ initialQuestions }: Quiz) => {
   useEffect(() => {
     setFlipped(false)
   }, [questions])
+
+  useEffect(() => {
+    handleGameRestart()
+  }, [handleGameRestart])
 
   return (
     <QuizLayout>
