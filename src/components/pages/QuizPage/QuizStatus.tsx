@@ -30,7 +30,7 @@ export const QuizStatus = ({
           <>
             <ProgressBar className='w-full' value={totalQuestions - questionsLeft} maxValue={totalQuestions} />
             <span className='px-2 text-base font-bold'>
-              {questionsLeft} / {totalQuestions}
+              {totalQuestions - questionsLeft} / {totalQuestions}
             </span>
           </>
         )}
