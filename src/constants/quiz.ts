@@ -35,7 +35,7 @@ export const mockQuestions: FlashCardQuestion[] = [
     answer:
       'A functioning prototype demonstrating core features and functionalities, with a focus on being polished and user-friendly.',
   },
-  {
+ /* {
     id: 3,
     question: 'Where should participants maintain their project code?',
     answer: 'A public code repository on a platform like GitHub, GitLab, or Bitbucket.',
@@ -80,5 +80,5 @@ export const mockQuestions: FlashCardQuestion[] = [
     question: 'What is encouraged for participants in terms of creativity?',
     answer:
       'To think innovatively, push creative boundaries, and strive to make a meaningful impact on education through their technological solution.',
-  },
+  },*/
 ]
