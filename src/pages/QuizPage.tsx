@@ -1,10 +1,6 @@
-import { QuizLayout } from '../components/layout/QuizLayout'
-import { FlashCard } from '../components/pages/QuizPage/FlashCard'
+import { Quiz } from '../components/pages/QuizPage/Quiz'
+import { mockQuestions } from '../constants/quiz'
 
 export const QuizPage = () => {
-  return (
-    <QuizLayout>
-      <FlashCard />
-    </QuizLayout>
-  )
+  return <Quiz initialQuestions={mockQuestions} />
 }

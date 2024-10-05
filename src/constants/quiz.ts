@@ -6,6 +6,7 @@ export enum QuestionGrade {
   FAIR = 3,
   POOR = 2,
   VERY_POOR = 1,
+  SKIPPED = 0,
 }
 
 export const mockQuestions: FlashCardQuestion[] = [
