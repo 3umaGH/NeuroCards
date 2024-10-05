@@ -12,7 +12,7 @@ type FlashCard = {
 
 export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }: FlashCard) => {
   const commonClassname =
-    'outline outline-gray-200 bg-white p-4 text-center flex justify-center items-center rounded-3xl border-gray-400 drop-shadow-lg'
+    'outline outline-gray-200 bg-white p-4 text-center overflow-auto flex justify-center items-center rounded-3xl border-gray-400 drop-shadow-lg'
 
   const [gradingAnimationFinished, setGradingAnimationFinished] = useState(false)
 
@@ -32,8 +32,8 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
           <div className='w-full h-full bg-black opacity-[0.005] absolute top-0 left-0 z-[1]' />
 
           {flipped && (
-            <div className='absolute z-[2] p-4 flex flex-col h-full justify-evenly'>
-              <div className='text-xl font-medium text-gray-500 lg:text-base'>{question.question}</div>
+            <div className='absolute z-[2] p-4 flex flex-col h-full justify-evenly gap-4'>
+              <div className='text-xl font-medium text-gray-500 lg:text-base line-clamp-2'>{question.question}</div>
               <div className='text-lg font-medium lg:text-xl'>{question.answer}</div>
 
               <div

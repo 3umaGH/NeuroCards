@@ -20,9 +20,11 @@ export const QuizStatus = ({ questionsLeft, totalQuestions, buttonEnabled, isFin
         </span>
       </div>
 
-      <Button onClick={onFlipClick} disabled={!buttonEnabled || isFinished}>
-        {isFinished ? 'Quiz Finished' : !buttonEnabled ? 'Please rate your answer' : 'Flip card'}
-      </Button>
+      {!isFinished && (
+        <Button onClick={onFlipClick} disabled={!buttonEnabled || isFinished}>
+          {!buttonEnabled ? 'Please rate your answer' : 'Flip card'}
+        </Button>
+      )}
     </div>
   )
 }
