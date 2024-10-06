@@ -6,6 +6,7 @@ import { FlashCard } from './FlashCard'
 import { QuizResult } from './QuizResult'
 import { QuizStatus } from './QuizStatus'
 import { shuffleArray } from '../../../util'
+import { BackArrow } from '../../common/BackArrow'
 
 type Quiz = {
   topic: string
@@ -72,7 +73,10 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
 
   return (
     <QuizLayout>
-      <h3 className='w-full my-4 text-2xl font-bold text-left text-white'>{topic}</h3>
+      <div className='flex flex-col w-full gap-0 my-2'>
+        <BackArrow onClick={() => {}} className='-ml-[6px]' />
+        <h3 className='w-full text-2xl font-bold text-white'>{topic}</h3>
+      </div>
       {!isQuizFinished ? (
         <FlashCard question={questions[0]} flipped={isFlipped} onGradeClick={handleGradeQuestion} />
       ) : (
