@@ -30,13 +30,10 @@ export const QuizResult = ({
 
       <div className='flex flex-col flex-1 w-full overflow-auto min-h-[150px] max-w-full border rounded-xl gap-2 p-2 md:p-4'>
         {answeredQuestions.map((question, index) => (
-          <div
-            key={`${question.id}_${question.answered_at}`}
-            className='flex items-center w-full gap-2 min-h-fit whitespace-nowrap'>
-            <span className='text-sm font-bold text-right w-[25px]'>{`${index + 1})`}</span>
-            <span className=''>
-              {gradeEmojiMap[question.grade]} {question.question}
-            </span>
+          <div key={`${question.id}_${question.answered_at}`} className='flex items-center w-full gap-1 min-h-fit'>
+            <span className='text-sm font-bold min-w-[18px] flex-shrink-0'>{`${index + 1}.`}</span>
+            <span>{gradeEmojiMap[question.grade]}</span>
+            <span className='pr-2 md:pr-4 whitespace-nowrap'>{question.question}</span>
           </div>
         ))}
       </div>
