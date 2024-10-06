@@ -16,3 +16,9 @@ export type FlashCardQuiz = {
   quiz_topic: string
   questions: FlashCardQuestion[]
 }
+
+export type QuizTableItem = {
+  id: number
+  quiz_topic: string
+  questions_amount: number
+}

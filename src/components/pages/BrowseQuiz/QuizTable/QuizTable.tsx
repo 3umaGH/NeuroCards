@@ -1,12 +1,12 @@
 import clsx from 'clsx'
-import { mockQuiz } from '../../../../constants/quiz'
+import { mockQuizListItems } from '../../../../constants/quiz'
 import { CommonProps } from '../../../../types/common'
 import { QuizTableItem } from './QuizTableItem'
 
 type QuizTable = CommonProps
 
 export const QuizTable = ({ className }: QuizTable) => {
-  const availableQuizzes = [mockQuiz]
+  const availableQuizzes = mockQuizListItems
 
   return (
     <div
