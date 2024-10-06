@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { QuestionGrade } from '../../../constants/quiz'
 import { FlashCardAnsweredQuestion, FlashCardQuestion } from '../../../types/quiz'
-import { QuizLayout } from '../../layout/QuizLayout'
+import { shuffleArray } from '../../../util'
+import { BackArrow } from '../../common/BackArrow'
 import { FlashCard } from './FlashCard'
 import { QuizResult } from './QuizResult'
 import { QuizStatus } from './QuizStatus'
-import { shuffleArray } from '../../../util'
-import { BackArrow } from '../../common/BackArrow'
 
 type Quiz = {
   topic: string
@@ -72,7 +71,7 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
   }, [handleGameRestart])
 
   return (
-    <QuizLayout>
+    <>
       <div className='flex flex-col w-full gap-0 my-2'>
         <BackArrow onClick={() => {}} className='-ml-[6px]' />
         <h3 className='w-full text-2xl font-bold text-white'>{topic}</h3>
@@ -96,6 +95,6 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
         onFlipClick={() => setFlipped(true)}
         onStopEndlessModeClick={handleStopEndlessMode}
       />
-    </QuizLayout>
+    </>
   )
 }
