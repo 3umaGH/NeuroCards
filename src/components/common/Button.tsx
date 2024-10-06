@@ -11,8 +11,8 @@ export const Button = ({ className, children, disabled, ...props }: Button) => {
       {...props}
       disabled={disabled}
       className={clsx(
-        'bg-[--primary] disabled:opacity-50 text-xs md:text-base text-white rounded-xl font-bold p-4 uppercase hover:brightness-90 transition-all w-full',
-        { 'active:scale-95': !disabled },
+        'bg-[--primary] disabled:opacity-50 text-xs md:text-base text-white rounded-xl font-bold p-4 uppercase transition-all w-full',
+        { 'active:scale-95 hover:brightness-90': !disabled },
         className
       )}>
       {children}
