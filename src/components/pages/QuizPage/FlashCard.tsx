@@ -11,11 +11,44 @@ type FlashCard = {
   onGradeClick: (grade: QuestionGrade) => void
 }
 
+const formatText = (text: string) => {
+  const boldBrackets = ['b[', ']b']
+  const splitWords = text.split(' ')
+
+  let isBold = false
+  const components: React.ReactNode[] = []
+
+  splitWords.forEach((word, index) => {
+    const cleanedWord = word.replaceAll(boldBrackets[0], '').replaceAll(boldBrackets[1], '')
+    const key = `${word}_${index}`
+
+    if (word.startsWith(boldBrackets[0])) {
+      isBold = true
+    }
+
+    if (isBold) {
+      components.push(
+        <span key={key} className='italic font-bold'>
+          {cleanedWord}
+        </span>
+      )
+    } else {
+      components.push(<span key={key}>{cleanedWord}</span>)
+    }
+
+    if (word.includes(boldBrackets[1])) {
+      isBold = false
+    }
+  })
+
+  return components
+}
+
 export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }: FlashCard) => {
   const commonClassname =
     'outline outline-gray-200 bg-white p-4 text-center overflow-auto flex justify-center items-center rounded-3xl border-gray-400 drop-shadow-lg'
-
   const [gradingAnimationFinished, setGradingAnimationFinished] = useState(false)
+  const formattedAnswer = formatText(question.answer)
 
   useEffect(() => {
     setGradingAnimationFinished(false)
@@ -45,7 +78,7 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
           {flipped && (
             <div className='absolute z-[2] p-4 flex flex-col h-full justify-evenly gap-4'>
               <div className='text-base font-medium text-gray-500 lg:text-xl line-clamp-2'>{question.question}</div>
-              <div className='text-lg font-medium lg:text-xl'>{question.answer}</div>
+              <div className='flex flex-wrap justify-center gap-1 text-lg lg:text-xl'>{formattedAnswer}</div>
 
               <div
                 className={clsx('flex flex-col items-center opacity-0', {
