@@ -1,11 +1,13 @@
 import clsx from 'clsx'
+import { mockQuiz } from '../../../../constants/quiz'
 import { CommonProps } from '../../../../types/common'
 import { QuizTableItem } from './QuizTableItem'
-import { mockQuiz } from '../../../../constants/quiz'
 
 type QuizTable = CommonProps
 
 export const QuizTable = ({ className }: QuizTable) => {
+  const availableQuizzes = [mockQuiz]
+
   return (
     <div
       className={clsx(
@@ -13,8 +15,8 @@ export const QuizTable = ({ className }: QuizTable) => {
         className
       )}>
       <div className='flex flex-col h-full overflow-auto'>
-        {new Array(20).fill(0).map(() => (
-          <QuizTableItem quiz={mockQuiz} />
+        {availableQuizzes.map(quiz => (
+          <QuizTableItem key={quiz.id} quiz={quiz} />
         ))}
       </div>
     </div>

@@ -17,6 +17,7 @@ export const gradeEmojiMap: Record<QuestionGrade, string> = {
 }
 
 export const mockQuiz: FlashCardQuiz = {
+  id: 0,
   quiz_topic: 'JavaScript and TypeScript Concepts',
   questions: [
     {
@@ -30,7 +31,7 @@ export const mockQuiz: FlashCardQuiz = {
       answer:
         "'this' in a regular function is b[dynamic]b. It refers to the object the method is called on or the global object if called outside a method.",
     },
-    {
+    /*{
       id: 2,
       question: 'What is the difference between a function declaration and a function expression?',
       answer:
@@ -82,6 +83,6 @@ export const mockQuiz: FlashCardQuiz = {
       question: 'What is a declarative approach in programming?',
       answer:
         'A declarative approach focuses on b[what to do]b rather than b[how to do it]b, emphasizing the desired outcome over the process.',
-    },
+    },*/
   ],
 }

@@ -12,6 +12,7 @@ export type FlashCardAnsweredQuestion = {
 } & FlashCardQuestion
 
 export type FlashCardQuiz = {
+  id: number
   quiz_topic: string
   questions: FlashCardQuestion[]
 }
