@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { QuestionGrade } from '../../../constants/quiz'
-import { FlashCardAnsweredQuestion, FlashCardQuestion } from '../../../types/quiz'
+import { FlashCardGrades, FlashCardQuestion } from '../../../types/quiz'
 import { shuffleArray } from '../../../util'
 import { BackArrow } from '../../common/BackArrow'
 import { FlashCard } from './FlashCard'
@@ -14,14 +14,25 @@ type Quiz = {
 
 export const Quiz = ({ topic, initialQuestions }: Quiz) => {
   const [questions, setQuestions] = useState<FlashCardQuestion[]>([]) // Unanswered questions;
-  const [answeredQuestions, setAnsweredQuestions] = useState<FlashCardAnsweredQuestion[]>([])
+  const [grades, setGrades] = useState<FlashCardGrades>({})
   const [totalQuestionsLength, setTotalQuestionsLength] = useState(initialQuestions.length)
   const [isEndlessMode, setEndlessMode] = useState(false)
   const [isFlipped, setFlipped] = useState(false)
   const isQuizFinished = questions.length === 0
 
   const handleGradeQuestion = (grade: QuestionGrade) => {
-    setAnsweredQuestions(p => [...p, { ...questions[0], grade: grade, answered_at: Date.now() }])
+    setGrades(p => {
+      const currentQuestion = questions[0]
+      const newStore = { ...p }
+
+      if (newStore[currentQuestion.id]) {
+        newStore[currentQuestion.id].push(grade)
+      } else {
+        newStore[currentQuestion.id] = [grade]
+      }
+
+      return newStore
+    })
 
     setQuestions(prev => {
       if (isEndlessMode) {
@@ -35,7 +46,7 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
   const resetGame = (newQuestions: FlashCardQuestion[], endless: boolean) => {
     setQuestions(() => {
       const newQuestionsState = [...newQuestions]
-      setAnsweredQuestions([])
+      setGrades([])
       setTotalQuestionsLength(newQuestionsState.length)
       setEndlessMode(endless)
 
@@ -80,7 +91,8 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
         <FlashCard question={questions[0]} flipped={isFlipped} onGradeClick={handleGradeQuestion} />
       ) : (
         <QuizResult
-          answeredQuestions={answeredQuestions}
+          questions={initialQuestions}
+          grades={grades}
           onRetryClick={handleGameRestart}
           onEndlessModeClick={handleEndlessGameStart}
           onBadGradeRetryClick={handleRetryBadGradesStart}

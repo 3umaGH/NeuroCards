@@ -6,10 +6,12 @@ export type FlashCardQuestion = {
   answer: string
 }
 
-export type FlashCardAnsweredQuestion = {
+export type FlashCardGrades = Record<number, QuestionGrade[]> // id, grades
+
+/*{
   grade: QuestionGrade
-  answered_at: number // Used as a key to prevent key collisions during endless mode.
-} & FlashCardQuestion
+  answered_at: number 
+} */
 
 export type FlashCardQuiz = {
   id: number
