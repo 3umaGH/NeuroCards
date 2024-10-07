@@ -14,7 +14,7 @@ export const QuizPage = () => {
   const formattedId = isNaN(Number(id)) ? -1 : Number(id)
 
   const { isPending, error, data } = useQuery({
-    queryKey: [`quiz`],
+    queryKey: [`quiz`, id],
     queryFn: () => (formattedId !== -1 ? getQuiz(formattedId) : null),
   })
 
