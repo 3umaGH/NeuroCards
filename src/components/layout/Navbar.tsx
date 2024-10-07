@@ -22,6 +22,10 @@ export const Navbar = () => {
   const location = useLocation()
   const [isExpanded, setExpanded] = useState(false)
 
+  const handleSidebarToggle = () => {
+    setExpanded(p => !p)
+  }
+
   useEffect(() => {
     setExpanded(false)
   }, [location.pathname])
@@ -32,7 +36,7 @@ export const Navbar = () => {
         className='fixed flex flex-col h-screen transition-all duration-500 max-w-fit min-w-0 bg-[rgba(255,255,255,0.975)] backdrop-blur-sm z-[100] overflow-y-auto overflow-x-hidden outline outline-gray-200 outline-[1px] drop-shadow-2xl'
         style={{ maxWidth: isExpanded ? '100%' : '0px', marginLeft: isExpanded ? '' : '-2px' }}>
         <div className='self-end m-4 mb-0'>
-          <CgClose className='w-5 h-5 cursor-pointer hover:scale-110' onClick={() => setExpanded(false)} />
+          <CgClose className='w-5 h-5 cursor-pointer hover:scale-110' onClick={handleSidebarToggle} />
         </div>
 
         <nav className='flex flex-col gap-3 p-4 pt-4 mr-4 overflow-hidden min-w-fit'>
@@ -75,7 +79,7 @@ export const Navbar = () => {
 
         <div className='block md:hidden'>
           <RxHamburgerMenu
-            onClick={() => setExpanded(true)}
+            onClick={handleSidebarToggle}
             className='w-5 h-5 transition-all cursor-pointer hover:text-[--primary] text-gray-600'
           />
         </div>
