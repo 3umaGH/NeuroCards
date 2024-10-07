@@ -10,6 +10,16 @@ export const AiTab = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const maxLength = 50
 
+  const updateText = (text: string) => {
+    if (text.length > maxLength) {
+      setText(text.substring(0, maxLength))
+      toast(`Your file is too big. Only ${maxLength} characters were imported.`)
+    } else {
+      setText(text)
+      toast.success('File successfully parsed.')
+    }
+  }
+
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.currentTarget.value
 
@@ -28,20 +38,28 @@ export const AiTab = () => {
 
     const file = e.target.files[0]
 
-    pdfToText(file)
-      .then(text => {
-        const formattedText = text.replaceAll('   ', ' ')
+    if (file.name.endsWith('.txt')) {
+      const reader = new FileReader()
 
-        if (formattedText.length > maxLength) {
-          setText(formattedText.substring(0, maxLength))
-          toast(`Your file is too big. Only ${maxLength} characters were imported.`)
-        } else {
-          setText(formattedText)
-          toast.success('File successfully parsed.')
-        }
-      })
-      .catch(() => toast.error('Could not parse this file. Try copy/pasting text manually.'))
-      .finally(() => (fileInputRef.current ? (fileInputRef.current.value = '') : null))
+      reader.onload = e => {
+        updateText((e.target?.result as string) ?? '')
+      }
+
+      reader.onerror = () => {
+        toast.error('Could not parse this file. Try copy/pasting text manually.')
+      }
+
+      reader.readAsText(file)
+    } else {
+      pdfToText(file)
+        .then(text => {
+          const formattedText = text.replaceAll('   ', ' ')
+
+          updateText(formattedText)
+        })
+        .catch(() => toast.error('Could not parse this file. Try copy/pasting text manually.'))
+        .finally(() => (fileInputRef.current ? (fileInputRef.current.value = '') : null))
+    }
   }
 
   const handleImportClick = () => {
@@ -55,12 +73,7 @@ export const AiTab = () => {
         <span className='text-sm'>Upload (.pdf .docx .txt)</span>
         <span className='text-sm'>Max 5MB</span>
 
-        <input
-          ref={fileInputRef}
-          type='file'
-          onChange={handleFileChange}
-          /*accept='application/pdf'*/ className='hidden'
-        />
+        <input ref={fileInputRef} type='file' onChange={handleFileChange} accept='.txt,.pdf' className='hidden' />
 
         <Button
           onClick={handleImportClick}
