@@ -9,14 +9,7 @@ export const BackArrow = ({ className }: BackArrow) => {
   const navigate = useNavigate()
 
   const handleBackClick = () => {
-    const referrer = document.referrer
-
-    // Do not navigate back to the external source if user arrived to the page from it. (navigate to homepage instead)
-    if (referrer && referrer.includes(window.location.origin)) {
-      navigate(-1)
-    } else {
-      navigate('/')
-    }
+    navigate(-1)
   }
 
   return (
