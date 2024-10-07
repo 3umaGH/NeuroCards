@@ -73,7 +73,7 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
   return (
     <>
       <div className='flex flex-col w-full gap-0 my-2'>
-        <BackArrow onClick={() => {}} className='-ml-[6px]' />
+        <BackArrow className='-ml-[6px]' />
         <h3 className='w-full text-2xl font-bold text-white'>{topic}</h3>
       </div>
       {!isQuizFinished ? (
