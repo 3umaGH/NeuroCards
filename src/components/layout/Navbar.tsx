@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { CgClose } from 'react-icons/cg'
 import { IoCreateOutline } from 'react-icons/io5'
@@ -22,10 +22,14 @@ export const Navbar = () => {
   const location = useLocation()
   const [isExpanded, setExpanded] = useState(false)
 
+  useEffect(() => {
+    setExpanded(false)
+  }, [location.pathname])
+
   return (
     <>
       <div
-        className='fixed flex flex-col h-screen transition-all duration-500 max-w-fit min-w-0 bg-[rgba(245,245,245,0.975)] backdrop-blur-sm z-[100] overflow-y-auto overflow-x-hidden outline outline-gray-200 outline-[2px] drop-shadow-xl'
+        className='fixed flex flex-col h-screen transition-all duration-500 max-w-fit min-w-0 bg-[rgba(255,255,255,0.975)] backdrop-blur-sm z-[100] overflow-y-auto overflow-x-hidden outline outline-gray-200 outline-[1px] drop-shadow-2xl'
         style={{ maxWidth: isExpanded ? '100%' : '0px', marginLeft: isExpanded ? '' : '-2px' }}>
         <div className='self-end m-4 mb-0'>
           <CgClose className='w-5 h-5 cursor-pointer hover:scale-110' onClick={() => setExpanded(false)} />
