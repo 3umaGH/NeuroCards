@@ -80,6 +80,7 @@ export const AiTab = () => {
         <input ref={fileInputRef} type='file' onChange={handleFileChange} accept='.txt,.pdf' className='hidden' />
 
         <Button
+          type='button'
           onClick={handleImportClick}
           className='px-2 py-1 mt-4 text-teal-800 bg-green-50 outline outline-teal-500 max-w-[120px] flex items-center gap-2 justify-center'>
           <FaFile />
@@ -117,8 +118,8 @@ export const AiTab = () => {
         <input type='checkbox' id='share' /> <label htmlFor='share'>Show in the public list</label>
       </div>*/}
 
-      <Button disabled={text.length < 100} className='self-end w-min'>
-        Submit
+      <Button disabled={text.length < 100} className='self-end w-min whitespace-nowrap'>
+        Generate Cards
       </Button>
     </form>
   )
