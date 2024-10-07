@@ -53,11 +53,11 @@ export const ManualTab = () => {
                   What is chlorophyll and why is it important?
                 </span>
 
-                <div className='flex gap-2'>
-                  <Button type='button' className='w-[60px] md:w-[75px] p-1.5'>
+                <div className='flex gap-2 w-[100px] md:w-[140px]'>
+                  <Button type='button' className='p-1'>
                     Edit
                   </Button>
-                  <Button type='button' className='w-[40px] p-1.5 bg-red-500'>
+                  <Button type='button' className='p-1 py-1.5 bg-red-500 '>
                     X
                   </Button>
                 </div>
