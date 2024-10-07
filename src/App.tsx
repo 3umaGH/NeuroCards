@@ -4,6 +4,7 @@ import { QuizPage } from './pages/QuizPage'
 import { HomePage } from './pages/HomePage'
 import { AddQuizPage } from './pages/AddQuizPage'
 import { BrowseQuiz } from './pages/BrowseQuiz'
+import { Toaster } from 'react-hot-toast'
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,33 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <>
+      <RouterProvider router={router} />
+
+      <Toaster
+        position='top-right'
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=''
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: '',
+          duration: 5000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+          },
+        }}
+      />
+    </>
+  )
 }
 
 export default App

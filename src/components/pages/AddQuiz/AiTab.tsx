@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 import { FaFile } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5'
 import pdfToText from 'react-pdftotext'
@@ -26,12 +27,21 @@ export const AiTab = () => {
     }
 
     const file = e.target.files[0]
+
     pdfToText(file)
-      .then(text => setText(text.replaceAll('   ', ' ')))
-      .catch(error => console.error('Failed to extract text from pdf'))
-      .finally(() => {
-        if (fileInputRef.current) fileInputRef.current.value = ''
+      .then(text => {
+        const formattedText = text.replaceAll('   ', ' ')
+
+        if (formattedText.length > maxLength) {
+          setText(formattedText.substring(0, maxLength))
+          toast(`Your file is too big. Only ${maxLength} characters were imported.`)
+        } else {
+          setText(formattedText)
+          toast.success('File successfully parsed.')
+        }
       })
+      .catch(() => toast.error('Could not parse this file. Try copy/pasting text manually.'))
+      .finally(() => (fileInputRef.current ? (fileInputRef.current.value = '') : null))
   }
 
   const handleImportClick = () => {
@@ -45,7 +55,12 @@ export const AiTab = () => {
         <span className='text-sm'>Upload (.pdf .docx .txt)</span>
         <span className='text-sm'>Max 5MB</span>
 
-        <input ref={fileInputRef} type='file' onChange={handleFileChange} accept='application/pdf' className='hidden' />
+        <input
+          ref={fileInputRef}
+          type='file'
+          onChange={handleFileChange}
+          /*accept='application/pdf'*/ className='hidden'
+        />
 
         <Button
           onClick={handleImportClick}
