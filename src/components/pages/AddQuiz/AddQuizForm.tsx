@@ -33,7 +33,7 @@ export const AddQuizForm = ({ className }: AddQuizForm) => {
           })}
           onClick={() => setMode('manual')}>
           <BiEdit className='min-w-7 min-h-7' />
-          Enter Manually
+          Manual
         </div>
       </div>
 
