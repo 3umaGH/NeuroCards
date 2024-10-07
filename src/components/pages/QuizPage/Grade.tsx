@@ -13,6 +13,18 @@ const gradeClassname: Record<QuestionGrade, string> = {
   [QuestionGrade.VERY_POOR]: 'bg-stone-800 px-3',
 }
 
+const gradeDescriptiors: Record<QuestionGrade, string> = {
+  [QuestionGrade.EXCELLENT]: 'Excellent',
+  [QuestionGrade.GOOD]: 'Good',
+  [QuestionGrade.FAIR]: 'Fair',
+  [QuestionGrade.POOR]: 'Poor',
+  [QuestionGrade.VERY_POOR]: 'Very Poor',
+}
+
 export const Grade = ({ grade }: GradeProps) => {
-  return <span className={clsx('px-2.5 py-0.5 rounded-full font-bold text-white', gradeClassname[grade])}>{grade}</span>
+  return (
+    <span className={clsx('px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap text-white', gradeClassname[grade])}>
+      {gradeDescriptiors[grade]}
+    </span>
+  )
 }
