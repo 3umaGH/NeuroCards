@@ -32,8 +32,8 @@ export const ManualTab = () => {
     <>
       {questionModalVisible && <AddQuestionModal onClose={handleModalClose} />}
 
-      <form onSubmit={handleFormSubmit} className='flex flex-col h-full gap-4 p-4 animate-fade-in'>
-        <div className='flex flex-col flex-1 h-full gap-4'>
+      <form onSubmit={handleFormSubmit} className={'flex-1 w-full h-full overflow-hidden bg-white outline-gray-300'}>
+        <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto'>
           <div className='flex flex-col gap-2'>
             <label htmlFor='topic' className='text-sm font-medium'>
               Quiz Name:
@@ -46,8 +46,8 @@ export const ManualTab = () => {
             />
           </div>
 
-          <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto outline rounded-xl outline-gray-200'>
-            {new Array(105).fill(0).map(() => (
+          <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto min-h-[250px] outline rounded-xl outline-gray-200'>
+            {new Array(415).fill(0).map(() => (
               <div className='flex items-center justify-between gap-2'>
                 <span className='overflow-hidden font-bold text-md md:text-lg whitespace-nowrap text-ellipsis'>
                   What is chlorophyll and why is it important?
@@ -63,16 +63,18 @@ export const ManualTab = () => {
                 </div>
               </div>
             ))}
+          </div>
 
-            <div className='flex items-end flex-1 h-full'>
-              <Button className='bg-green-500'>Add Question</Button>
-            </div>
+          <div className='flex justify-between gap-4'>
+            <Button disabled={isSubmitting} className='whitespace-nowrap max-w-[150px]'>
+              Submit
+            </Button>
+
+            <Button type='button' className='bg-green-500 max-w-fit' onClick={() => setQuestionModalVisible(true)}>
+              Add Question
+            </Button>
           </div>
         </div>
-
-        <Button disabled={isSubmitting} className='self-end w-min whitespace-nowrap'>
-          Submit
-        </Button>
       </form>
     </>
   )
