@@ -1,10 +1,11 @@
+import clsx from 'clsx'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { CgClose } from 'react-icons/cg'
 import { IoCreateOutline } from 'react-icons/io5'
 import { LuLayoutList } from 'react-icons/lu'
 import { RxHamburgerMenu } from 'react-icons/rx'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 type NavItem = {
   name: string
@@ -18,6 +19,7 @@ const navItems: NavItem[] = [
 ]
 
 export const Navbar = () => {
+  const location = useLocation()
   const [isExpanded, setExpanded] = useState(false)
 
   return (
@@ -34,7 +36,10 @@ export const Navbar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className='flex gap-1 items-center whitespace-nowrap font-medium transition-all cursor-pointer text-lg hover:text-[--primary]'>
+              className={clsx(
+                'flex gap-1 items-center whitespace-nowrap font-medium transition-all cursor-pointer text-lg hover:text-[--primary]',
+                { 'text-[--primary]': location.pathname === item.path }
+              )}>
               <item.icon />
               {item.name}
             </Link>
@@ -54,7 +59,10 @@ export const Navbar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className='p-2 flex gap-1 items-center font-medium transition-all cursor-pointer hover:text-[--primary]'>
+              className={clsx(
+                'p-2 flex gap-1 items-center font-medium transition-all cursor-pointer hover:text-[--primary]',
+                { 'text-[--primary]': location.pathname === item.path }
+              )}>
               <item.icon />
               {item.name}
             </Link>
