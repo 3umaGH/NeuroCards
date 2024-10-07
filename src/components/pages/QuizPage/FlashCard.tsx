@@ -56,7 +56,7 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
 
   return (
     <div
-      className={clsx('card relative w-full flex-1 select-none text-[#2c2b35]', {
+      className={clsx('card animate-fade-in relative w-full flex-1 select-none text-[#2c2b35]', {
         flipped: flipped,
       })}
       onClick={onCardClick}>
