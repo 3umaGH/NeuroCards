@@ -4,6 +4,7 @@ import { BiEdit } from 'react-icons/bi'
 import { BsRobot } from 'react-icons/bs'
 import { CommonProps } from '../../../types/common'
 import { AiTab } from './AiTab'
+import { ManualTab } from './ManualTab'
 
 type AddQuizForm = CommonProps
 
@@ -36,10 +37,10 @@ export const AddQuizForm = ({ className }: AddQuizForm) => {
         </div>
       </div>
 
-      <div className='flex-1 h-full p-4 overflow-auto'>
+  
         {mode === 'ai' && <AiTab />}
-        {mode === 'manual' && <div className='animate-fade-in'>manual</div>}
-      </div>
+        {mode === 'manual' && <ManualTab />}
+  
     </div>
   )
 }

@@ -85,7 +85,7 @@ export const AiTab = () => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit} className='flex flex-col flex-1 h-full gap-4 animate-fade-in'>
+    <form onSubmit={handleFormSubmit} className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto animate-fade-in'>
       <div className='flex flex-col items-center justify-center gap-2 my-8'>
         <IoCloudUploadOutline className='w-12 h-12 text-gray-400' />
         <span className='text-sm'>Upload (.pdf .docx .txt)</span>
