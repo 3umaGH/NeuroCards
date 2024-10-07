@@ -13,8 +13,8 @@ type NavItem = {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Browse Quizzes', path: '/a', icon: LuLayoutList },
-  { name: 'Create New Quiz', path: '/b', icon: IoCreateOutline },
+  { name: 'Browse Quizzes', path: '/browse', icon: LuLayoutList },
+  { name: 'Create New Quiz', path: '/quiz/new', icon: IoCreateOutline },
 ]
 
 export const Navbar = () => {
@@ -42,10 +42,12 @@ export const Navbar = () => {
         </nav>
       </div>
       <nav className='flex  items-center justify-between gap-x-8 w-screen px-4 border border-gray-200 bg-[rgba(255,255,255,1)] drop-shadow-xl rounded-b-xl overflow-hidden backdrop-blur-2xl '>
-        <img
-          src='https://placeholderlogo.com/img/placeholder-logo-6.png'
-          className='w-[108px] h-[50px] md:w-[163px] md:h-[75px]'
-        />
+        <Link to='/'>
+          <img
+            src='https://placeholderlogo.com/img/placeholder-logo-6.png'
+            className='w-[108px] h-[50px] md:w-[163px] md:h-[75px]'
+          />
+        </Link>
 
         <div className='hidden gap-4 md:flex'>
           {navItems.map(item => (
