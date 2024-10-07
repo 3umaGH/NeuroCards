@@ -8,7 +8,7 @@ import { Button } from '../../common/Button'
 export const AiTab = () => {
   const [text, setText] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const maxLength = 50
+  const maxLength = 5000
 
   const updateText = (text: string) => {
     if (text.length > maxLength) {
@@ -66,8 +66,12 @@ export const AiTab = () => {
     if (fileInputRef.current) fileInputRef.current.click()
   }
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    alert('TODO')
+  }
+
   return (
-    <div className='flex flex-col flex-1 h-full gap-4 animate-fade-in'>
+    <form onSubmit={handleFormSubmit} className='flex flex-col flex-1 h-full gap-4 animate-fade-in'>
       <div className='flex flex-col items-center justify-center gap-2 my-8'>
         <IoCloudUploadOutline className='w-12 h-12 text-gray-400' />
         <span className='text-sm'>Upload (.pdf .docx .txt)</span>
@@ -113,9 +117,9 @@ export const AiTab = () => {
         <input type='checkbox' id='share' /> <label htmlFor='share'>Show in the public list</label>
       </div>*/}
 
-      <Button disabled className='self-end w-min'>
+      <Button disabled={text.length < 100} className='self-end w-min'>
         Submit
       </Button>
-    </div>
+    </form>
   )
 }
