@@ -76,24 +76,20 @@ export const QuizResult = ({
               <div className='flex items-center w-full gap-2 text-xs md:text-base'>
                 <span className='ml-6 font-bold'>{questionGrades.length === 1 ? 'Grade' : 'Grades'}:</span>{' '}
                 {questionGrades.map(grade => (
-                  <Grade key={`${key}_${grade}`} grade={grade} className='text-sm' />
+                  <Grade key={`${key}_${grade}`} grade={grade} className='text-xs md:text-sm' />
                 ))}
               </div>
             </div>
           )
         })}
-
-  
       </div>
 
+      <div className='flex items-center justify-center w-full gap-2 pt-2 pb-2 mt-4 border-t border-b'>
+        <span className='italic font-bold'>Average grade:</span>
+        <Grade grade={calculateAverageGrade(grades)} className='text-sm' />
+      </div>
 
-          <div className='flex items-center gap-2 mt-4'>
-            <span className='italic font-bold'>Average grade:</span>
-            <Grade grade={calculateAverageGrade(grades)} className='text-sm' />
-    
-        </div>
-
-      <div className='w-full mt-4 md:mt-8'>
+      <div className='w-full mt-4 md:mt-4'>
         <div className='flex gap-4'>
           <Button onClick={onRetryClick} className='px-1 py-2 md:p-4'>
             Try again
@@ -108,7 +104,7 @@ export const QuizResult = ({
           onClick={handleStartBadGradesGame}
           disabled={isRetryBadGradesDisabled}
           className='px-1 py-2 mt-4 bg-teal-500 md:p-4'>
-          Rety bad grades
+          Retry wrong answers
         </Button>
       </div>
     </div>
