@@ -41,9 +41,25 @@ export const QuizResult = ({
     onBadGradeRetryClick(poorAnswerIds)
   }
 
+  const calculateAverageGrade = (grades: FlashCardGrades) => {
+    let total = 0
+    let totalGrades = 0
+
+    Object.keys(grades).forEach(key => {
+      const value = grades[Number(key)]
+
+      value.forEach(grade => {
+        total += grade
+        totalGrades++
+      })
+    })
+
+    return Math.ceil(total / totalGrades)
+  }
+
   return (
     <div className='flex flex-col items-center w-full h-full p-4 py-4 overflow-auto bg-white animate-fade-in justify-evenly rounded-3xl'>
-      <h1 className='my-8 text-3xl font-black uppercase md:my-16 md:text-5xl animate-bounce'>Complete!</h1>
+      <h1 className='my-2 text-3xl font-black uppercase md:my-8 md:text-5xl animate-bounce'>Complete!</h1>
 
       <div className='flex flex-col flex-1 w-full overflow-auto min-h-[150px] max-w-full border rounded-xl gap-2 p-2 md:p-4'>
         {Object.keys(grades).map((key, index) => {
@@ -57,7 +73,7 @@ export const QuizResult = ({
                 <span className='pr-2 md:pr-4 whitespace-nowrap'>{question}</span>
               </div>
 
-              <div className='flex items-center w-full gap-2'>
+              <div className='flex items-center w-full gap-2 text-sm md:text-base'>
                 <span className='ml-6 font-bold'>{questionGrades.length === 1 ? 'Grade' : 'Grades'}:</span>{' '}
                 {questionGrades.map(grade => (
                   <Grade key={`${key}_${grade}`} grade={grade} />
@@ -66,18 +82,29 @@ export const QuizResult = ({
             </div>
           )
         })}
+
+        <div className='flex flex-col items-center justify-end flex-1 gap-2 my-2 text-base md:mt-4 md:mb-0 md:text-lg'>
+          <div className='w-full border-t' />
+          <span className='font-bold'>Average grade:</span>
+          <Grade grade={calculateAverageGrade(grades)} className='min-w-[100px]' />
+        </div>
       </div>
 
-      <div className='w-full mt-8 md:mt-16'>
+      <div className='w-full mt-4 md:mt-8'>
         <div className='flex gap-4'>
-          <Button onClick={onRetryClick}>Try again</Button>
+          <Button onClick={onRetryClick} className='px-1 py-2 md:p-4'>
+            Try again
+          </Button>
 
-          <Button onClick={onEndlessModeClick} className='bg-red-500'>
+          <Button onClick={onEndlessModeClick} className='px-1 py-2 bg-red-500 md:p-4'>
             Endless Mode
           </Button>
         </div>
 
-        <Button onClick={handleStartBadGradesGame} disabled={isRetryBadGradesDisabled} className='mt-4 bg-teal-500'>
+        <Button
+          onClick={handleStartBadGradesGame}
+          disabled={isRetryBadGradesDisabled}
+          className='px-1 py-2 mt-4 bg-teal-500 md:p-4'>
           Rety bad grades
         </Button>
       </div>
