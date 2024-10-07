@@ -1,11 +1,13 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from 'react-hot-toast'
 import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration } from 'react-router-dom'
 import { Layout } from './components/layout/Layout'
-import { QuizPage } from './pages/QuizPage'
-import { HomePage } from './pages/HomePage'
 import { AddQuizPage } from './pages/AddQuizPage'
 import { BrowseQuiz } from './pages/BrowseQuiz'
-import { Toaster } from 'react-hot-toast'
+import { HomePage } from './pages/HomePage'
+import { QuizPage } from './pages/QuizPage'
 
+const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: '/',
@@ -51,31 +53,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-
-      <Toaster
-        position='top-right'
-        reverseOrder={false}
-        gutter={8}
-        containerClassName=''
-        containerStyle={{}}
-        toastOptions={{
-          // Define default options
-          className: '',
-          duration: 5000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-          },
-
-          // Default options for specific types
-          success: {
-            duration: 3000,
-          },
-        }}
-      />
-    </>
+      <Toaster position='bottom-right' reverseOrder={false} gutter={8} />
+    </QueryClientProvider>
   )
 }
 

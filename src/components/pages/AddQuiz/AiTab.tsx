@@ -4,8 +4,10 @@ import { FaFile } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5'
 import pdfToText from 'react-pdftotext'
 import { Button } from '../../common/Button'
+import { createAIQuiz } from '../../../api/api'
 
 export const AiTab = () => {
+  const [isSubmitting, setSubmitting] = useState(false)
   const [text, setText] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
   const maxLength = 5000
@@ -67,7 +69,19 @@ export const AiTab = () => {
   }
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    alert('TODO')
+    e.preventDefault()
+
+    setSubmitting(true)
+
+    toast
+      .promise(createAIQuiz(text), {
+        loading: 'Submitting...',
+        success: 'Cards successfully generated!',
+        error: e => `Failed to generate cards: ${e.message}`,
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
   }
 
   return (
@@ -118,7 +132,7 @@ export const AiTab = () => {
         <input type='checkbox' id='share' /> <label htmlFor='share'>Show in the public list</label>
       </div>*/}
 
-      <Button disabled={text.length < 100} className='self-end w-min whitespace-nowrap'>
+      <Button disabled={text.length < 100 || isSubmitting} className='self-end w-min whitespace-nowrap'>
         Generate Cards
       </Button>
     </form>
