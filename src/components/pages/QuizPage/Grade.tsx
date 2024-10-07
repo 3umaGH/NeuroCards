@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { QuestionGrade } from '../../../constants/quiz'
+import { CommonProps } from '../../../types/common'
 
 type GradeProps = {
   grade: QuestionGrade
@@ -21,9 +22,14 @@ const gradeDescriptiors: Record<QuestionGrade, string> = {
   [QuestionGrade.VERY_POOR]: 'Very Poor',
 }
 
-export const Grade = ({ grade }: GradeProps) => {
+export const Grade = ({ grade, className }: GradeProps & CommonProps) => {
   return (
-    <span className={clsx('px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap text-white', gradeClassname[grade])}>
+    <span
+      className={clsx(
+        'px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap text-center text-white',
+        gradeClassname[grade],
+        className
+      )}>
       {gradeDescriptiors[grade]}
     </span>
   )
