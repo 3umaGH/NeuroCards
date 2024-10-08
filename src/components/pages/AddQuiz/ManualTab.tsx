@@ -26,6 +26,10 @@ export const ManualTab = () => {
       return
     }
 
+    if (!confirm(`Are you sure you want to submit this quiz?`)) {
+      return
+    }
+
     setSubmitting(true)
 
     toast
