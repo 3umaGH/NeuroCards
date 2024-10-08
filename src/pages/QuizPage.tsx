@@ -6,6 +6,7 @@ import { Loading } from '../components/common/Loading'
 import { QuizLayout } from '../components/layout/QuizLayout'
 import { Quiz } from '../components/pages/QuizPage/Quiz'
 import { useNavigate, useParams } from 'react-router-dom'
+import { getErrorMessage } from '../util'
 
 export const QuizPage = () => {
   const navigate = useNavigate()
@@ -19,8 +20,11 @@ export const QuizPage = () => {
   })
 
   useEffect(() => {
-    if (error) toast.error(error.message ?? error)
-  }, [error])
+    if (error) {
+      toast.error(getErrorMessage(error))
+      navigate('/')
+    }
+  }, [error, navigate])
 
   useEffect(() => {
     if (formattedId === -1) {
