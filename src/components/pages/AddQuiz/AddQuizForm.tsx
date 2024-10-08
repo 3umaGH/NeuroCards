@@ -59,8 +59,8 @@ export const AddQuizForm = ({ className }: AddQuizForm) => {
         </div>
       ) : (
         <>
-          {mode === 'ai' && !error && <AiTab />}
-          {mode === 'manual' && !error && <ManualTab />}
+          {mode === 'ai' && !error && <AiTab config={data} />}
+          {mode === 'manual' && !error && <ManualTab config={data} />}
         </>
       )}
     </div>

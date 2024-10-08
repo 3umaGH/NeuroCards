@@ -1,17 +1,19 @@
-import ReactDOM from 'react-dom'
-import { Button } from '../../common/Button'
-import { CgClose } from 'react-icons/cg'
-import { FlashCardQuestionDraft } from '../../../types/quiz'
 import { useState } from 'react'
+import ReactDOM from 'react-dom'
 import toast from 'react-hot-toast'
+import { CgClose } from 'react-icons/cg'
+import { ConfigDTO } from '../../../types/config'
+import { FlashCardQuestionDraft } from '../../../types/quiz'
+import { Button } from '../../common/Button'
 
 type EditQuestionModal = {
+  config: ConfigDTO
   editing: FlashCardQuestionDraft | null
   onClose: () => void
   onSubmit: (question: FlashCardQuestionDraft) => void
 }
 
-export const EditQuestionModal = ({ editing, onClose, onSubmit }: EditQuestionModal) => {
+export const EditQuestionModal = ({ config, editing, onClose, onSubmit }: EditQuestionModal) => {
   const [formData, setFormData] = useState<FlashCardQuestionDraft>(
     editing !== null ? editing : { question: '', answer: '' }
   )
@@ -21,13 +23,13 @@ export const EditQuestionModal = ({ editing, onClose, onSubmit }: EditQuestionMo
   }
 
   const handleSubmit = () => {
-    if (formData.question.length < 3) {
-      toast.error('Question should be at least 3 characters long!')
+    if (formData.question.length < config.MIN_QUESTION_LENGTH) {
+      toast.error(`Question should be at least ${config.MIN_QUESTION_LENGTH} characters long!`)
       return
     }
 
-    if (formData.answer.length < 3) {
-      toast.error('Answer should be at least 3 characters long!')
+    if (formData.answer.length < config.MIN_ANSWER_LENGTH) {
+      toast.error(`Answer should be at least ${config.MIN_ANSWER_LENGTH} characters long!`)
       return
     }
 
@@ -51,7 +53,7 @@ export const EditQuestionModal = ({ editing, onClose, onSubmit }: EditQuestionMo
           <input
             value={formData.question}
             onChange={handleChange}
-            maxLength={100}
+            maxLength={config.MAX_QUESTION_LENGTH}
             id='question'
             placeholder='What is chlorophyll and why is it important?'
             className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
@@ -65,7 +67,7 @@ export const EditQuestionModal = ({ editing, onClose, onSubmit }: EditQuestionMo
           <input
             value={formData.answer}
             onChange={handleChange}
-            maxLength={100}
+            maxLength={config.MAX_ANSWER_LENGTH}
             id='answer'
             placeholder='Chlorophyll is a...'
             className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'

@@ -3,17 +3,18 @@ import toast from 'react-hot-toast'
 import { FaFile } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5'
 import pdfToText from 'react-pdftotext'
+import { useNavigate } from 'react-router-dom'
 import { createAIQuiz } from '../../../api/api'
+import { ConfigDTO } from '../../../types/config'
 import { getErrorMessage } from '../../../util'
 import { Button } from '../../common/Button'
-import { useNavigate } from 'react-router-dom'
 
-export const AiTab = () => {
+export const AiTab = ({ config }: { config: ConfigDTO }) => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [text, setText] = useState('')
   const navigate = useNavigate()
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const maxLength = 10000
+  const maxLength = config.MAX_AI_INPUT
 
   const updateText = (text: string, origin: 'file' | 'user') => {
     if (text.length > maxLength) {
@@ -115,6 +116,7 @@ export const AiTab = () => {
 
           <textarea
             id='textarea'
+            maxLength={maxLength}
             className='w-full p-2 bg-gray-50 rounded-xl min-h-[50px] h-full focus:outline-blue-200'
             onChange={handleTextChange}
             value={text}
@@ -133,7 +135,7 @@ export const AiTab = () => {
         <input type='checkbox' id='share' /> <label htmlFor='share'>Show in the public list</label>
       </div>*/}
 
-      <Button disabled={text.length < 100 || isSubmitting} className='self-end w-min whitespace-nowrap'>
+      <Button disabled={text.length < config.MIN_AI_INPUT || isSubmitting} className='self-end w-min whitespace-nowrap'>
         Generate Cards
       </Button>
     </form>

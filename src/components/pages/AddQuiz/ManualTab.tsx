@@ -2,12 +2,13 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { createManualQuiz } from '../../../api/api'
+import { ConfigDTO } from '../../../types/config'
 import { FlashCardQuestionDraft, FlashCardQuizDraft } from '../../../types/quiz'
 import { getErrorMessage } from '../../../util'
 import { Button } from '../../common/Button'
 import { EditQuestionModal } from './EditQuestionModal'
 
-export const ManualTab = () => {
+export const ManualTab = ({ config }: { config: ConfigDTO }) => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [questionModalVisible, setQuestionModalVisible] = useState(false)
   const [draft, setDraft] = useState<FlashCardQuizDraft>({ quiz_topic: '', questions: [] })
@@ -17,13 +18,13 @@ export const ManualTab = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (draft.quiz_topic.length < 3) {
-      toast.error('Quiz name should be at least 3 characters long!')
+    if (draft.quiz_topic.length < config.MIN_QUIZ_TITLE_LENGTH) {
+      toast.error(`Quiz name should be at least ${config.MIN_QUIZ_TITLE_LENGTH} characters long!`)
       return
     }
 
-    if (draft.questions.length < 2) {
-      toast.error('Please create a quiz with at least 2 questions.')
+    if (draft.questions.length < config.MIN_QUESTIONS_IN_QUIZ) {
+      toast.error(`Please create a quiz with at least ${config.MIN_QUESTIONS_IN_QUIZ} questions.`)
       return
     }
 
@@ -88,8 +89,8 @@ export const ManualTab = () => {
   }
 
   const handleAddQuestion = () => {
-    if (draft.questions.length >= 3) {
-      toast.error('Maximum of 30 questions is allowed.')
+    if (draft.questions.length >= config.MAX_QUESTIONS_IN_QUIZ) {
+      toast.error(`Maximum of ${config.MAX_QUESTIONS_IN_QUIZ} questions is allowed.`)
       return
     }
 
@@ -100,6 +101,7 @@ export const ManualTab = () => {
     <>
       {questionModalVisible && (
         <EditQuestionModal
+          config={config}
           onClose={handleModalClose}
           onSubmit={handleCreateUpdateQuestion}
           editing={editingQuestionIndex !== null ? draft.questions[editingQuestionIndex] : null}
@@ -116,7 +118,7 @@ export const ManualTab = () => {
             <input
               value={draft.quiz_topic}
               onChange={handleNameChange}
-              maxLength={50}
+              maxLength={config.MAX_QUIZ_TITLE_LENGTH}
               id='topic'
               placeholder='The Biology Quiz'
               className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
