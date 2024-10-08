@@ -77,6 +77,15 @@ export const ManualTab = () => {
     setDraft(p => ({ ...p, quiz_topic: e.target.value }))
   }
 
+  const handleAddQuestion = () => {
+    if (draft.questions.length >= 3) {
+      toast.error('Maximum of 30 questions is allowed.')
+      return
+    }
+
+    setQuestionModalVisible(true)
+  }
+
   return (
     <>
       {questionModalVisible && (
@@ -97,6 +106,7 @@ export const ManualTab = () => {
             <input
               value={draft.quiz_topic}
               onChange={handleNameChange}
+              maxLength={50}
               id='topic'
               placeholder='The Biology Quiz'
               className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
@@ -127,7 +137,7 @@ export const ManualTab = () => {
               Submit
             </Button>
 
-            <Button type='button' className='bg-green-500 max-w-fit' onClick={() => setQuestionModalVisible(true)}>
+            <Button type='button' className='bg-green-500 max-w-fit' onClick={handleAddQuestion}>
               Add Question
             </Button>
           </div>
