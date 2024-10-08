@@ -10,13 +10,14 @@ import { getErrorMessage } from '../../../util'
 import { AiTab } from './AiTab'
 import { ManualTab } from './ManualTab'
 import { Loading } from '../../common/Loading'
+import { Button } from '../../common/Button'
 
 type AddQuizForm = CommonProps
 
 export const AddQuizForm = ({ className }: AddQuizForm) => {
   const [mode, setMode] = useState<'ai' | 'manual'>('ai')
 
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: [`config`],
     queryFn: () => getConfig(),
   })
@@ -59,8 +60,19 @@ export const AddQuizForm = ({ className }: AddQuizForm) => {
         </div>
       ) : (
         <>
-          {mode === 'ai' && !error && <AiTab config={data} />}
-          {mode === 'manual' && !error && <ManualTab config={data} />}
+          {error && !isPending ? (
+            <div className='flex flex-col items-center justify-center w-full h-full gap-2 p-4'>
+              <span className='text-lg'>{getErrorMessage(error)}</span>
+              <Button onClick={() => refetch()} className='max-w-[200px]'>
+                Retry
+              </Button>
+            </div>
+          ) : (
+            <>
+              {mode === 'ai' && <AiTab config={data} />}
+              {mode === 'manual' && <ManualTab config={data} />}
+            </>
+          )}
         </>
       )}
     </div>
