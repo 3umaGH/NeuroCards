@@ -20,6 +20,10 @@ export const BrowseQuiz = () => {
       <h3 className='w-full text-xl font-bold text-white md:text-4xl'>Explore Available Quizzes</h3>
 
       <QuizTable quizzes={data ?? []} loading={isPending} />
+
+      <span className='-my-2 font-medium text-center text-red-600 md:-my-4 line-clamp-1'>
+        Quizzes are submitted by users and are <span className='font-bold'>not moderated</span>.
+      </span>
     </div>
   )
 }
