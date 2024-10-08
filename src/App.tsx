@@ -8,7 +8,14 @@ import { HomePage } from './pages/HomePage'
 import { QuizPage } from './pages/QuizPage'
 import { QuizCreatedPage } from './pages/QuizCreatedPage'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+})
+
 const router = createBrowserRouter([
   {
     path: '/',
