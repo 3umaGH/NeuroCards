@@ -85,7 +85,7 @@ export const Quiz = ({ topic, initialQuestions }: Quiz) => {
     <>
       <div className='flex flex-col w-full gap-0 my-2'>
         <BackArrow className='-ml-[6px]' />
-        <h3 className='w-full text-2xl font-bold text-white'>{topic}</h3>
+        <h3 className='w-full overflow-hidden text-2xl font-bold text-white line-clamp-2 text-ellipsis'>{topic}</h3>
       </div>
       {!isQuizFinished ? (
         <FlashCard question={questions[0]} flipped={isFlipped} onGradeClick={handleGradeQuestion} />
