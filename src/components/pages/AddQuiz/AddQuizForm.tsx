@@ -1,15 +1,31 @@
+import { useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { BiEdit } from 'react-icons/bi'
 import { BsRobot } from 'react-icons/bs'
+import { getConfig } from '../../../api/api'
 import { CommonProps } from '../../../types/common'
+import { getErrorMessage } from '../../../util'
 import { AiTab } from './AiTab'
 import { ManualTab } from './ManualTab'
+import { Loading } from '../../common/Loading'
 
 type AddQuizForm = CommonProps
 
 export const AddQuizForm = ({ className }: AddQuizForm) => {
   const [mode, setMode] = useState<'ai' | 'manual'>('ai')
+
+  const { isPending, error, data } = useQuery({
+    queryKey: [`config`],
+    queryFn: () => getConfig(),
+  })
+
+  useEffect(() => {
+    if (error) {
+      toast.error(getErrorMessage(error))
+    }
+  }, [error])
 
   return (
     <div
@@ -37,10 +53,16 @@ export const AddQuizForm = ({ className }: AddQuizForm) => {
         </div>
       </div>
 
-  
-        {mode === 'ai' && <AiTab />}
-        {mode === 'manual' && <ManualTab />}
-  
+      {isPending ? (
+        <div className='flex items-center justify-center w-full h-full'>
+          <Loading />
+        </div>
+      ) : (
+        <>
+          {mode === 'ai' && !error && <AiTab />}
+          {mode === 'manual' && !error && <ManualTab />}
+        </>
+      )}
     </div>
   )
 }
