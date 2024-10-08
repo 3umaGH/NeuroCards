@@ -10,12 +10,12 @@ export const AiTab = () => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [text, setText] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const maxLength = 5000
+  const maxLength = 10000
 
   const updateText = (text: string) => {
     if (text.length > maxLength) {
       setText(text.substring(0, maxLength))
-      toast(`Your file is too big. Only ${maxLength} characters were imported.`)
+      toast.error(`Your input is too big. Only ${maxLength} characters were imported.`)
     } else {
       setText(text)
       toast.success('File successfully parsed.')
@@ -23,14 +23,7 @@ export const AiTab = () => {
   }
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.currentTarget.value
-
-    if (value.length > maxLength) {
-      e.preventDefault()
-      return
-    }
-
-    setText(value)
+    updateText(e.currentTarget.value)
   }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
