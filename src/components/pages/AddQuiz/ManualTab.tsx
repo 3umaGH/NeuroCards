@@ -118,7 +118,7 @@ export const ManualTab = () => {
             />
           </div>
 
-          <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto min-h-[250px] outline rounded-xl outline-gray-200'>
+          <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto min-h-[200px] outline rounded-xl outline-gray-200'>
             {draft.questions.map((question, index) => (
               <div key={index} className='flex items-center justify-between gap-2'>
                 <span className='overflow-hidden font-bold text-md md:text-lg whitespace-nowrap text-ellipsis'>
@@ -137,12 +137,16 @@ export const ManualTab = () => {
             ))}
           </div>
 
+          <span className='text-xs text-gray-500 md:text-sm'>
+            Note: Manually created quizzes won't be listed in 'Browse Quizzes' section.
+          </span>
+
           <div className='flex justify-between gap-4'>
             <Button disabled={isSubmitting} className='whitespace-nowrap max-w-[150px]'>
               Submit
             </Button>
 
-            <Button type='button' className='bg-green-500 max-w-fit' onClick={handleAddQuestion}>
+            <Button type='button' className='bg-green-500 max-w-[150px]' onClick={handleAddQuestion}>
               Add Question
             </Button>
           </div>
