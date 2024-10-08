@@ -4,12 +4,14 @@ import { createManualQuiz } from '../../../api/api'
 import { FlashCardQuestionDraft, FlashCardQuizDraft } from '../../../types/quiz'
 import { Button } from '../../common/Button'
 import { EditQuestionModal } from './EditQuestionModal'
+import { useNavigate } from 'react-router-dom'
 
 export const ManualTab = () => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [questionModalVisible, setQuestionModalVisible] = useState(false)
   const [draft, setDraft] = useState<FlashCardQuizDraft>({ quiz_topic: '', questions: [] })
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<null | number>(null)
+  const navigate = useNavigate()
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -31,6 +33,9 @@ export const ManualTab = () => {
         loading: 'Submitting...',
         success: 'Success!',
         error: e => `Failed to generate cards: ${e.message}`,
+      })
+      .then(quiz => {
+        navigate(`/quiz/created/${quiz.id}`)
       })
       .finally(() => {
         setSubmitting(false)

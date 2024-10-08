@@ -6,6 +6,7 @@ import { AddQuizPage } from './pages/AddQuizPage'
 import { BrowseQuiz } from './pages/BrowseQuiz'
 import { HomePage } from './pages/HomePage'
 import { QuizPage } from './pages/QuizPage'
+import { QuizCreatedPage } from './pages/QuizCreatedPage'
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
         element: (
           <Layout>
             <AddQuizPage />
+          </Layout>
+        ),
+      },
+      {
+        path: 'quiz/created/:id',
+        element: (
+          <Layout>
+            <QuizCreatedPage />
           </Layout>
         ),
       },

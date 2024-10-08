@@ -23,5 +23,5 @@ export const createAIQuiz = (text: string) => {
 }
 
 export const createManualQuiz = (draft: FlashCardQuizDraft) => {
-  return delayedPromise(null)
+  return delayedPromise(mockQuiz)
 }
