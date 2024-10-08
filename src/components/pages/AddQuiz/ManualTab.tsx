@@ -1,20 +1,33 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { createAIQuiz } from '../../../api/api'
+import { createManualQuiz } from '../../../api/api'
+import { FlashCardQuestionDraft, FlashCardQuizDraft } from '../../../types/quiz'
 import { Button } from '../../common/Button'
-import { AddQuestionModal } from './AddQuestionModal'
+import { EditQuestionModal } from './EditQuestionModal'
 
 export const ManualTab = () => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [questionModalVisible, setQuestionModalVisible] = useState(false)
+  const [draft, setDraft] = useState<FlashCardQuizDraft>({ quiz_topic: '', questions: [] })
+  const [editingQuestionIndex, setEditingQuestionIndex] = useState<null | number>(null)
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    if (draft.quiz_topic.length < 3) {
+      toast.error('Quiz name should be at least 3 characters long!')
+      return
+    }
+
+    if (draft.questions.length < 2) {
+      toast.error('Please create a quiz with at least 2 questions.')
+      return
+    }
+
     setSubmitting(true)
 
     toast
-      .promise(createAIQuiz(''), {
+      .promise(createManualQuiz(draft), {
         loading: 'Submitting...',
         success: 'Success!',
         error: e => `Failed to generate cards: ${e.message}`,
@@ -28,9 +41,51 @@ export const ManualTab = () => {
     setQuestionModalVisible(false)
   }
 
+  const handleStartEditQuestion = (index: number) => {
+    setEditingQuestionIndex(index)
+    setQuestionModalVisible(true)
+  }
+
+  const handleDeleteQuestion = (index: number) => {
+    if (!confirm(`Are you sure you want to delete ${draft.questions[index].question}?`)) {
+      return
+    }
+
+    setDraft(p => {
+      return { ...p, questions: p.questions.filter((_, i) => i !== index) }
+    })
+  }
+
+  const handleCreateUpdateQuestion = (question: FlashCardQuestionDraft) => {
+    if (editingQuestionIndex !== null) {
+      // Update
+      setDraft(p => ({
+        ...p,
+        questions: p.questions.map((item, index) => (index === editingQuestionIndex ? question : item)),
+      }))
+
+      setEditingQuestionIndex(null)
+    } else {
+      // Create
+      setDraft(p => ({ ...p, questions: [...p.questions, question] }))
+    }
+
+    setQuestionModalVisible(false)
+  }
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDraft(p => ({ ...p, quiz_topic: e.target.value }))
+  }
+
   return (
     <>
-      {questionModalVisible && <AddQuestionModal onClose={handleModalClose} />}
+      {questionModalVisible && (
+        <EditQuestionModal
+          onClose={handleModalClose}
+          onSubmit={handleCreateUpdateQuestion}
+          editing={editingQuestionIndex !== null ? draft.questions[editingQuestionIndex] : null}
+        />
+      )}
 
       <form onSubmit={handleFormSubmit} className={'flex-1 w-full h-full overflow-hidden bg-white outline-gray-300'}>
         <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto'>
@@ -40,6 +95,8 @@ export const ManualTab = () => {
             </label>
 
             <input
+              value={draft.quiz_topic}
+              onChange={handleNameChange}
               id='topic'
               placeholder='The Biology Quiz'
               className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
@@ -47,17 +104,17 @@ export const ManualTab = () => {
           </div>
 
           <div className='flex flex-col flex-1 h-full gap-4 p-4 overflow-auto min-h-[250px] outline rounded-xl outline-gray-200'>
-            {new Array(415).fill(0).map(() => (
-              <div className='flex items-center justify-between gap-2'>
+            {draft.questions.map((question, index) => (
+              <div key={index} className='flex items-center justify-between gap-2'>
                 <span className='overflow-hidden font-bold text-md md:text-lg whitespace-nowrap text-ellipsis'>
-                  What is chlorophyll and why is it important?
+                  {question.question}
                 </span>
 
                 <div className='flex gap-2 w-[100px] md:w-[140px]'>
-                  <Button type='button' className='p-1'>
+                  <Button onClick={() => handleStartEditQuestion(index)} type='button' className='p-1'>
                     Edit
                   </Button>
-                  <Button type='button' className='p-1 py-1.5 bg-red-500 '>
+                  <Button onClick={() => handleDeleteQuestion(index)} type='button' className='p-1 py-1.5 bg-red-500 '>
                     X
                   </Button>
                 </div>

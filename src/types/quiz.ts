@@ -8,11 +8,6 @@ export type FlashCardQuestion = {
 
 export type FlashCardGrades = Record<number, QuestionGrade[]> // id, grades
 
-/*{
-  grade: QuestionGrade
-  answered_at: number 
-} */
-
 export type FlashCardQuiz = {
   id: number
   quiz_topic: string
@@ -24,3 +19,6 @@ export type QuizTableItem = {
   quiz_topic: string
   questions_amount: number
 }
+
+export type FlashCardQuizDraft = Omit<FlashCardQuiz, 'id' | 'questions'> & { questions: FlashCardQuestionDraft[] }
+export type FlashCardQuestionDraft = Omit<FlashCardQuestion, 'id'>

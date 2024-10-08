@@ -1,12 +1,39 @@
 import ReactDOM from 'react-dom'
 import { Button } from '../../common/Button'
 import { CgClose } from 'react-icons/cg'
+import { FlashCardQuestionDraft } from '../../../types/quiz'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
 
-type AddQuestionModal = {
+type EditQuestionModal = {
+  editing: FlashCardQuestionDraft | null
   onClose: () => void
+  onSubmit: (question: FlashCardQuestionDraft) => void
 }
 
-export const AddQuestionModal = ({ onClose }: AddQuestionModal) => {
+export const EditQuestionModal = ({ editing, onClose, onSubmit }: EditQuestionModal) => {
+  const [formData, setFormData] = useState<FlashCardQuestionDraft>(
+    editing !== null ? editing : { question: '', answer: '' }
+  )
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(p => ({ ...p, [e.target.id]: e.target.value }))
+  }
+
+  const handleSubmit = () => {
+    if (formData.question.length < 3) {
+      toast.error('Question should be at least 3 characters long!')
+      return
+    }
+
+    if (formData.answer.length < 3) {
+      toast.error('Answer should be at least 3 characters long!')
+      return
+    }
+
+    onSubmit(formData)
+  }
+
   return ReactDOM.createPortal(
     <div className='fixed top-0 left-0 w-screen h-screen z-[100] animate-fade-in'>
       <div className='w-screen h-screen bg-black opacity-20 z-[1]' onClick={onClose} />
@@ -22,6 +49,9 @@ export const AddQuestionModal = ({ onClose }: AddQuestionModal) => {
           </label>
 
           <input
+            value={formData.question}
+            onChange={handleChange}
+            maxLength={100}
             id='question'
             placeholder='What is chlorophyll and why is it important?'
             className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
@@ -33,14 +63,17 @@ export const AddQuestionModal = ({ onClose }: AddQuestionModal) => {
           </label>
 
           <input
+            value={formData.answer}
+            onChange={handleChange}
+            maxLength={100}
             id='answer'
             placeholder='Chlorophyll is a...'
             className='w-full p-2 rounded-md bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
           />
         </div>
 
-        <Button type='button' className='self-end bg-green-500 whitespace-nowrap w-min'>
-          Add Question
+        <Button onClick={handleSubmit} type='button' className='self-end bg-green-500 whitespace-nowrap w-min'>
+          {editing !== null ? 'Edit' : 'Add'} Question
         </Button>
       </div>
     </div>,

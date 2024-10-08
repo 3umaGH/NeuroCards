@@ -1,4 +1,5 @@
 import { mockQuiz, mockQuizListItems } from '../constants/quiz'
+import { FlashCardQuizDraft } from '../types/quiz'
 
 // Used for mocking
 const delayedPromise = <T>(result: T): Promise<T> => {
@@ -21,6 +22,6 @@ export const createAIQuiz = (text: string) => {
   return delayedPromise(null)
 }
 
-export const createManualQuiz = () => {
+export const createManualQuiz = (draft: FlashCardQuizDraft) => {
   return delayedPromise(null)
 }
