@@ -1,27 +1,20 @@
-import { mockQuiz, mockQuizListItems } from '../constants/quiz'
-import { FlashCardQuizDraft } from '../types/quiz'
+import axios from 'axios'
+import { FlashCardQuiz, FlashCardQuizDraft, QuizTableItem } from '../types/quiz'
 
-// Used for mocking
-const delayedPromise = <T>(result: T): Promise<T> => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(result)
-    }, Math.max(500, Math.random() * 3000))
-  })
+const BASE_URL = 'http://localhost:3000/v1/quiz'
+
+export const getRecentQuizzes = async (): Promise<QuizTableItem[]> => {
+  return (await axios.get(`${BASE_URL}`)).data
 }
 
-export const getRecentQuizzes = () => {
-  return delayedPromise(mockQuizListItems)
+export const getQuiz = async (id: number): Promise<FlashCardQuiz> => {
+  return (await axios.get(`${BASE_URL}/${id}`)).data
 }
 
-export const getQuiz = (id: number) => {
-  return delayedPromise(mockQuiz)
+export const createAIQuiz = async (text: string) => {
+  return (await axios.post(`${BASE_URL}`, { text })).data
 }
 
-export const createAIQuiz = (text: string) => {
-  return delayedPromise(null)
-}
-
-export const createManualQuiz = (draft: FlashCardQuizDraft) => {
-  return delayedPromise(mockQuiz)
+export const createManualQuiz = async (draft: FlashCardQuizDraft) => {
+  return (await axios.post(`${BASE_URL}`, { draft })).data
 }
