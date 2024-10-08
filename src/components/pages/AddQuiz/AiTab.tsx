@@ -3,27 +3,32 @@ import toast from 'react-hot-toast'
 import { FaFile } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5'
 import pdfToText from 'react-pdftotext'
-import { Button } from '../../common/Button'
 import { createAIQuiz } from '../../../api/api'
+import { getErrorMessage } from '../../../util'
+import { Button } from '../../common/Button'
+import { useNavigate } from 'react-router-dom'
 
 export const AiTab = () => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [text, setText] = useState('')
+  const navigate = useNavigate()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const maxLength = 10000
 
-  const updateText = (text: string) => {
+  const updateText = (text: string, origin: 'file' | 'user') => {
     if (text.length > maxLength) {
       setText(text.substring(0, maxLength))
-      toast.error(`Your input is too big. Only ${maxLength} characters were imported.`)
+
+      if (origin === 'file') toast.error(`Your input is too big. Only ${maxLength} characters were imported.`)
     } else {
       setText(text)
-      toast.success('File successfully parsed.')
+
+      if (origin === 'file') toast.success('File successfully parsed.')
     }
   }
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    updateText(e.currentTarget.value)
+    updateText(e.currentTarget.value, 'user')
   }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +42,7 @@ export const AiTab = () => {
       const reader = new FileReader()
 
       reader.onload = e => {
-        updateText((e.target?.result as string) ?? '')
+        updateText((e.target?.result as string) ?? '', 'file')
       }
 
       reader.onerror = () => {
@@ -50,7 +55,7 @@ export const AiTab = () => {
         .then(text => {
           const formattedText = text.replaceAll('   ', ' ')
 
-          updateText(formattedText)
+          updateText(formattedText, 'file')
         })
         .catch(() => toast.error('Could not parse this file. Try copy/pasting text manually.'))
         .finally(() => (fileInputRef.current ? (fileInputRef.current.value = '') : null))
@@ -70,7 +75,10 @@ export const AiTab = () => {
       .promise(createAIQuiz(text), {
         loading: 'Submitting...',
         success: 'Cards successfully generated!',
-        error: e => `Failed to generate cards: ${e.message}`,
+        error: e => getErrorMessage(e),
+      })
+      .then(result => {
+        navigate(`/quiz/created/${result.id}`)
       })
       .finally(() => {
         setSubmitting(false)

@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 import { createManualQuiz } from '../../../api/api'
 import { FlashCardQuestionDraft, FlashCardQuizDraft } from '../../../types/quiz'
+import { getErrorMessage } from '../../../util'
 import { Button } from '../../common/Button'
 import { EditQuestionModal } from './EditQuestionModal'
-import { useNavigate } from 'react-router-dom'
 
 export const ManualTab = () => {
   const [isSubmitting, setSubmitting] = useState(false)
@@ -36,7 +37,7 @@ export const ManualTab = () => {
       .promise(createManualQuiz(draft), {
         loading: 'Submitting...',
         success: 'Success!',
-        error: e => `Failed to generate cards: ${e.message}`,
+        error: e => getErrorMessage(e),
       })
       .then(quiz => {
         navigate(`/quiz/created/${quiz.id}`)
