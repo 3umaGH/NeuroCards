@@ -16,8 +16,8 @@ export const getQuiz = async (id: number): Promise<FlashCardQuiz> => {
   return (await axios.get(`${BASE_URL}/quiz/${id}`)).data
 }
 
-export const createAIQuiz = async (text: string) => {
-  return (await axios.post(`${BASE_URL}/quiz`, { text })).data
+export const createAIQuiz = async (text: string, showInList: boolean) => {
+  return (await axios.post(`${BASE_URL}/quiz`, { text, showInList: showInList })).data
 }
 
 export const createManualQuiz = async (draft: FlashCardQuizDraft) => {

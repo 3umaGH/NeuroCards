@@ -11,8 +11,10 @@ import { Button } from '../../common/Button'
 
 export const AiTab = ({ config }: { config: ConfigDTO }) => {
   const [isSubmitting, setSubmitting] = useState(false)
+  const [showInList, setShowInList] = useState(true)
   const [text, setText] = useState('')
   const navigate = useNavigate()
+
   const fileInputRef = useRef<HTMLInputElement>(null)
   const maxLength = config.MAX_AI_INPUT
 
@@ -67,13 +69,17 @@ export const AiTab = ({ config }: { config: ConfigDTO }) => {
     if (fileInputRef.current) fileInputRef.current.click()
   }
 
+  const handleListVisibilityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowInList(e.currentTarget.checked)
+  }
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     setSubmitting(true)
 
     toast
-      .promise(createAIQuiz(text), {
+      .promise(createAIQuiz(text, showInList), {
         loading: 'Submitting...',
         success: 'Cards successfully generated!',
         error: e => getErrorMessage(e),
@@ -131,9 +137,10 @@ export const AiTab = ({ config }: { config: ConfigDTO }) => {
         </span>
       </div>
 
-      {/*} <div className='flex items-center gap-2'>
-        <input type='checkbox' id='share' /> <label htmlFor='share'>Show in the public list</label>
-      </div>*/}
+      <div className='flex items-center gap-2'>
+        <input checked={showInList} type='checkbox' id='share' onChange={handleListVisibilityChange} />
+        <label htmlFor='share'>Show at 'Browse Quizzes' page</label>
+      </div>
 
       <Button disabled={text.length < config.MIN_AI_INPUT || isSubmitting} className='self-end w-min whitespace-nowrap'>
         Generate Cards
