@@ -21,7 +21,7 @@ export const BrowseQuiz = () => {
 
       <QuizTable quizzes={data ?? []} loading={isPending} />
 
-      <span className='-my-2 font-medium text-center text-red-600 md:-my-4 line-clamp-1'>
+      <span className='-my-2 text-sm font-medium text-center text-red-600 md:-my-4'>
         Quizzes are submitted by users and are <span className='font-bold'>not moderated</span>.
       </span>
     </div>
