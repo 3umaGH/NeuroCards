@@ -33,7 +33,7 @@ export const Navbar = () => {
   return (
     <>
       <div
-        className='fixed flex flex-col h-screen transition-all duration-500 max-w-fit min-w-0 bg-[rgba(255,255,255,0.975)] backdrop-blur-sm z-[100] overflow-y-auto overflow-x-hidden outline outline-gray-200 outline-[1px] drop-shadow-2xl'
+        className='fixed left-0 flex flex-col h-screen transition-all duration-500 max-w-fit min-w-0 bg-[rgba(255,255,255,0.975)] backdrop-blur-sm z-[100] overflow-y-auto overflow-x-hidden outline outline-gray-200 outline-[1px] drop-shadow-2xl'
         style={{ maxWidth: isExpanded ? '100%' : '0px', marginLeft: isExpanded ? '' : '-2px' }}>
         <div className='self-end m-4 mb-0'>
           <CgClose className='w-5 h-5 cursor-pointer hover:scale-110' onClick={handleSidebarToggle} />
@@ -54,7 +54,7 @@ export const Navbar = () => {
           ))}
         </nav>
       </div>
-      <nav className='flex  items-center justify-between gap-x-8 w-screen px-4 border border-gray-200 bg-[rgba(255,255,255,1)] drop-shadow-xl rounded-b-xl overflow-hidden backdrop-blur-2xl '>
+      <nav className='flex fixed top-0 left-0 items-center justify-between gap-x-8 w-screen px-4 border border-gray-200 bg-[rgba(255,255,255,1)] drop-shadow-xl rounded-b-xl overflow-hidden backdrop-blur-2xl '>
         <Link to='/'>
           <img
             src='https://placeholderlogo.com/img/placeholder-logo-6.png'
