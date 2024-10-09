@@ -39,7 +39,7 @@ export const QuizTable = ({ quizzes, loading, className }: QuizTable) => {
           placeholder='Search'
           className='w-full p-2 rounded-xl bg-gray-50 outline outline-gray-200 focus:outline-blue-200'
         />
-        <Button onClick={() => setSearchQuery(null)} className='w-min'>
+        <Button onClick={() => setSearchQuery(null)} className='w-min' aria-label='Clear'>
           <MdClear />
         </Button>
       </div>

@@ -63,11 +63,11 @@ export const FlashCard = memo(({ question, flipped, onGradeClick, onCardClick }:
       <div className='w-full card-inner'>
         <div className={clsx('card-front text-xl lg:text-2xl font-bold relative', commonClassname)}>
           <div className='absolute bottom-[0%] left-[50%] z-[1] translate-x-[-50%] opacity-5 w-[100%] overflow-hidden brightness-0'>
-            <img src={logo} className='w-full h-full rotate-180' />
+            <img src={logo} alt='Logo' className='w-full h-full rotate-180' />
           </div>
 
           <div className='absolute top-[0%] left-[50%] z-[1] translate-x-[-50%] opacity-5 w-[100%] overflow-hidden brightness-0'>
-            <img src={logo} className='w-full h-full' />
+            <img src={logo} alt='Logo' className='w-full h-full' />
           </div>
 
           <div className='z-[2]'> {question.question}</div>

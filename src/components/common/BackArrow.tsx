@@ -16,6 +16,8 @@ export const BackArrow = ({ className }: BackArrow) => {
     <img
       src={arrowSvg}
       onClick={handleBackClick}
+      alt='Back'
+      aria-label='Back'
       className={clsx(
         'w-8 h-8 md:w-12 md:h-12 invert opacity-50 hover:opacity-80 cursor-pointer transition-all',
         className

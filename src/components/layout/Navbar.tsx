@@ -58,6 +58,8 @@ export const Navbar = () => {
         <Link to='/'>
           <img
             src='https://placeholderlogo.com/img/placeholder-logo-6.png'
+            alt='Logo'
+            aria-label='Homepage'
             className='w-[108px] h-[50px] md:w-[163px] md:h-[75px]'
           />
         </Link>
