@@ -28,7 +28,7 @@ export const QuizTable = ({ quizzes, loading, className }: QuizTable) => {
   return (
     <div
       className={clsx(
-        'flex-1 w-full h-full overflow-hidden bg-white rounded-3xl drop-shadow-xl outline outline-gray-300',
+        'flex-1 flex flex-col w-full h-full overflow-hidden bg-white rounded-3xl drop-shadow-xl outline outline-gray-300',
         className
       )}>
       <div className='flex gap-4 p-2 border-b md:p-4'>
