@@ -1,11 +1,11 @@
+import { createManualQuiz } from '@/api/api'
+import { Button } from '@/components/common/Button'
+import { ConfigDTO } from '@/types/config'
+import { FlashCardQuestionDraft, FlashCardQuizDraft } from '@/types/quiz'
+import { getErrorMessage } from '@/util'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { createManualQuiz } from '../../../../../api/api'
-import { ConfigDTO } from '../../../../../types/config'
-import { FlashCardQuestionDraft, FlashCardQuizDraft } from '../../../../../types/quiz'
-import { getErrorMessage } from '../../../../../util'
-import { Button } from '../../../../common/Button'
 import { EditQuestionModal } from './EditQuestionModal'
 
 export const ManualTab = ({ config }: { config: ConfigDTO }) => {

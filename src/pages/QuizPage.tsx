@@ -1,12 +1,12 @@
+import { getQuiz } from '@/api/api'
+import { Loading } from '@/components/common/Loading'
+import { QuizLayout } from '@/components/layout/QuizLayout'
+import { Quiz } from '@/components/pages/QuizPage/Quiz/Quiz'
+import { getErrorMessage } from '@/util'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { getQuiz } from '../api/api'
-import { Loading } from '../components/common/Loading'
-import { QuizLayout } from '../components/layout/QuizLayout'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getErrorMessage } from '../util'
-import { Quiz } from '../components/pages/QuizPage/Quiz/Quiz'
 
 export const QuizPage = () => {
   const navigate = useNavigate()

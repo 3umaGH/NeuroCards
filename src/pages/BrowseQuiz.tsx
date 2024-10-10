@@ -1,9 +1,9 @@
+import { getRecentQuizzes } from '@/api/api'
+import { QuizTable } from '@/components/pages/BrowseQuiz/QuizTable/QuizTable'
+import { getErrorMessage } from '@/util'
 import { useQuery } from '@tanstack/react-query'
-import { getRecentQuizzes } from '../api/api'
-import { QuizTable } from '../components/pages/BrowseQuiz/QuizTable/QuizTable'
-import toast from 'react-hot-toast'
 import { useEffect } from 'react'
-import { getErrorMessage } from '../util'
+import toast from 'react-hot-toast'
 
 export const BrowseQuiz = () => {
   const { isPending, error, data } = useQuery({

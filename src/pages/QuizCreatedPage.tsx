@@ -1,7 +1,7 @@
+import { Button } from '@/components/common/Button'
 import toast from 'react-hot-toast'
 import { FaRegCopy } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
-import { Button } from '../components/common/Button'
 
 export const QuizCreatedPage = () => {
   const { id } = useParams()

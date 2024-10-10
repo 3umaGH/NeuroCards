@@ -1,13 +1,13 @@
+import { createAIQuiz } from '@/api/api'
+import { Button } from '@/components/common/Button'
+import { ConfigDTO } from '@/types/config'
+import { getErrorMessage } from '@/util'
 import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { FaFile } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5'
 import pdfToText from 'react-pdftotext'
 import { useNavigate } from 'react-router-dom'
-import { createAIQuiz } from '../../../../../api/api'
-import { ConfigDTO } from '../../../../../types/config'
-import { getErrorMessage } from '../../../../../util'
-import { Button } from '../../../../common/Button'
 
 export const AiTab = ({ config }: { config: ConfigDTO }) => {
   const [isSubmitting, setSubmitting] = useState(false)

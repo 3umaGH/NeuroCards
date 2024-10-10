@@ -1,10 +1,10 @@
+import { Button } from '@/components/common/Button'
+import { Loading } from '@/components/common/Loading'
+import { CommonProps } from '@/types/common'
+import { QuizTableItem as QuizTableItemType } from '@/types/quiz'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { MdClear } from 'react-icons/md'
-import { CommonProps } from '../../../../types/common'
-import { QuizTableItem as QuizTableItemType } from '../../../../types/quiz'
-import { Button } from '../../../common/Button'
-import { Loading } from '../../../common/Loading'
 import { QuizTableItem } from './QuizTableItem'
 
 type QuizTable = { quizzes: QuizTableItemType[]; loading: boolean } & CommonProps

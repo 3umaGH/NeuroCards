@@ -1,5 +1,5 @@
-import { Button } from '../../../../common/Button'
-import { ProgressBar } from '../../../../common/ProgressBar'
+import { Button } from '@/components/common/Button'
+import { ProgressBar } from '@/components/common/ProgressBar'
 
 type QuizStatus = {
   questionsLeft: number

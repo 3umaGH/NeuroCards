@@ -1,5 +1,5 @@
+import { QuizTableItem as QuizTableItemType } from '@/types/quiz'
 import { Link } from 'react-router-dom'
-import { QuizTableItem as QuizTableItemType } from '../../../../types/quiz'
 
 type QuizTableItemProps = { quiz: QuizTableItemType }
 

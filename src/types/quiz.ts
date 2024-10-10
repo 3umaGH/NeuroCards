@@ -1,4 +1,4 @@
-import { QuestionGrade } from '../constants/quiz'
+import { QuestionGrade } from '@/constants/quiz'
 
 export type FlashCardQuestion = {
   id: number

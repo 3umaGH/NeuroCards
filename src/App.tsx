@@ -1,12 +1,12 @@
+import { Layout } from '@/components/layout/Layout'
+import { AddQuizPage } from '@/pages/AddQuizPage'
+import { BrowseQuiz } from '@/pages/BrowseQuiz'
+import { HomePage } from '@/pages/HomePage'
+import { QuizCreatedPage } from '@/pages/QuizCreatedPage'
+import { QuizPage } from '@/pages/QuizPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
 import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration } from 'react-router-dom'
-import { Layout } from './components/layout/Layout'
-import { AddQuizPage } from './pages/AddQuizPage'
-import { BrowseQuiz } from './pages/BrowseQuiz'
-import { HomePage } from './pages/HomePage'
-import { QuizPage } from './pages/QuizPage'
-import { QuizCreatedPage } from './pages/QuizCreatedPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {

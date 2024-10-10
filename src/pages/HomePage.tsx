@@ -1,9 +1,9 @@
+import { Button } from '@/components/common/Button'
 import { BiBook, BiUpload } from 'react-icons/bi'
 import { BsRobot } from 'react-icons/bs'
 import { PiCardsThreeDuotone } from 'react-icons/pi'
 import { RiAiGenerate } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
-import { Button } from '../components/common/Button'
 
 export const HomePage = () => {
   return (

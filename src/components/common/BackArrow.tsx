@@ -1,7 +1,7 @@
+import arrowSvg from '@/assets/arrow.svg'
+import { CommonProps } from '@/types/common'
 import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
-import arrowSvg from '../../assets/arrow.svg'
-import { CommonProps } from '../../types/common'
 
 type BackArrow = CommonProps
 

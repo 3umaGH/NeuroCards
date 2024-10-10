@@ -1,5 +1,5 @@
+import { CommonProps } from '@/types/common'
 import clsx from 'clsx'
-import { CommonProps } from '../../types/common'
 
 type Loading = CommonProps
 
