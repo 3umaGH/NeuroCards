@@ -97,7 +97,6 @@ export const AiTab = ({ config }: { config: ConfigDTO }) => {
       <div className='flex flex-col items-center justify-center gap-2 my-8'>
         <IoCloudUploadOutline className='w-12 h-12 text-gray-400' />
         <span className='text-sm'>Upload (.pdf .docx .txt)</span>
-        <span className='text-sm'>Max 5MB</span>
 
         <input ref={fileInputRef} type='file' onChange={handleFileChange} accept='.txt,.pdf' className='hidden' />
 
