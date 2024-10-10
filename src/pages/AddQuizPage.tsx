@@ -1,4 +1,4 @@
-import { AddQuizForm } from "../components/pages/AddQuiz/AddQuizForm"
+import { AddQuizForm } from "../components/pages/AddQuiz/AddQuizForm/AddQuizForm"
 
 export const AddQuizPage = () => {
   return (

@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { memo, useEffect, useState } from 'react'
-import { gradeEmojiMap, QuestionGrade } from '../../../constants/quiz'
-import { FlashCardQuestion } from '../../../types/quiz'
-import logo from '../../../assets/NeuroCard.svg'
+import { gradeEmojiMap, QuestionGrade } from '../../../../../constants/quiz'
+import { FlashCardQuestion } from '../../../../../types/quiz'
+import logo from '../../../../../assets/NeuroCard.svg'
 
 type FlashCard = {
   question: FlashCardQuestion

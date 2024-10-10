@@ -1,6 +1,6 @@
-import { QuestionGrade } from '../../../constants/quiz'
-import { FlashCardGrades, FlashCardQuestion } from '../../../types/quiz'
-import { Button } from '../../common/Button'
+import { QuestionGrade } from '../../../../../constants/quiz'
+import { FlashCardQuestion, FlashCardGrades } from '../../../../../types/quiz'
+import { Button } from '../../../../common/Button'
 import { Grade } from './Grade'
 
 type QuizResult = {

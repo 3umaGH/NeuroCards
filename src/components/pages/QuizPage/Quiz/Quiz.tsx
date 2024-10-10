@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
-import { QuestionGrade } from '../../../constants/quiz'
-import { FlashCardGrades, FlashCardQuestion } from '../../../types/quiz'
-import { shuffleArray } from '../../../util'
-import { BackArrow } from '../../common/BackArrow'
-import { FlashCard } from './FlashCard'
-import { QuizResult } from './QuizResult'
-import { QuizStatus } from './QuizStatus'
+import { QuestionGrade } from '../../../../constants/quiz'
+import { FlashCardQuestion, FlashCardGrades } from '../../../../types/quiz'
+import { shuffleArray } from '../../../../util'
+import { BackArrow } from '../../../common/BackArrow'
+import { FlashCard } from './components/FlashCard'
+import { QuizResult } from './components/QuizResult'
+import { QuizStatus } from './components/QuizStatus'
 
 type Quiz = {
   topic: string

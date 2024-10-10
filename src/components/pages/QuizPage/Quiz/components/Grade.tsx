@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { QuestionGrade } from '../../../constants/quiz'
-import { CommonProps } from '../../../types/common'
+import { QuestionGrade } from '../../../../../constants/quiz'
+import { CommonProps } from '../../../../../types/common'
 
 type GradeProps = {
   grade: QuestionGrade

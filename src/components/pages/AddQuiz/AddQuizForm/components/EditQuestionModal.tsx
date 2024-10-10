@@ -2,9 +2,9 @@ import { useState } from 'react'
 import ReactDOM from 'react-dom'
 import toast from 'react-hot-toast'
 import { CgClose } from 'react-icons/cg'
-import { ConfigDTO } from '../../../types/config'
-import { FlashCardQuestionDraft } from '../../../types/quiz'
-import { Button } from '../../common/Button'
+import { ConfigDTO } from '../../../../../types/config'
+import { FlashCardQuestionDraft } from '../../../../../types/quiz'
+import { Button } from '../../../../common/Button'
 
 type EditQuestionModal = {
   config: ConfigDTO
